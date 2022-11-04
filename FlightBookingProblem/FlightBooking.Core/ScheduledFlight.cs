@@ -44,79 +44,48 @@ namespace FlightBooking.Core
                                                                 : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));            
         }
 
-        private void ComputeLoyaltyPoints(out int totalLoyaltyPointsAccrued, out int totalLoyaltyPointsRedeemed)
+        public void ComputeLoyaltyPoints(out int totalLoyaltyPointsAccrued, out int totalLoyaltyPointsRedeemed)
         {
-            int _totalLoyaltyPointsAccrued = 0;
-            int _totalLoyaltyPointsRedeemed = 0;
+            totalLoyaltyPointsAccrued = 0;
+            totalLoyaltyPointsRedeemed = 0;
 
-            Passengers.Where(p => p.Type == PassengerType.LoyaltyMember).ToList().ForEach(p =>
+            foreach (var passenger in Passengers.Where(p => p.Type == PassengerType.LoyaltyMember))
+            {
+                if (passenger.IsUsingLoyaltyPoints)
                 {
-                    ComputeLoyaltyPoints(p, out _totalLoyaltyPointsAccrued, out _totalLoyaltyPointsRedeemed);
-                });
-
-            totalLoyaltyPointsAccrued = _totalLoyaltyPointsAccrued;
-            totalLoyaltyPointsRedeemed = _totalLoyaltyPointsRedeemed;
+                    int loyaltyPointsRedeemed = Convert.ToInt32(Math.Ceiling(FlightRoute.BasePrice));
+                    passenger.LoyaltyPoints -= loyaltyPointsRedeemed;
+                    totalLoyaltyPointsRedeemed += loyaltyPointsRedeemed;
+                }
+                else
+                {
+                    totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
+                }
+            }
         }
 
-        private void ComputeLoyaltyPoints(Passenger p, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued)
+        public double GetFlightCost()
         {
-            totalLoyaltyPointsRedeemed = 0;
-            totalLoyaltyPointsAccrued = 0;
+            return Passengers.Sum(p => FlightRoute.BaseCost);
+        }
 
-            if (p.IsUsingLoyaltyPoints)
-            {
-                int loyaltyPointsRedeemed = Convert.ToInt32(Math.Ceiling(FlightRoute.BasePrice));
-                p.LoyaltyPoints -= loyaltyPointsRedeemed;
-                totalLoyaltyPointsRedeemed += loyaltyPointsRedeemed;
-            }
-            else
-            {
-                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
-            }
+        public int GetSeatsTaken()
+        {
+            return Passengers.Count();
         }
 
         public string GetSummary()
         {
-            double costOfFlight = 0;
+            double costOfFlight = GetFlightCost();
             double profitFromFlight = GetExpectedProfitFromFlight();
+            int seatsTaken = GetSeatsTaken();
+
             int totalLoyaltyPointsAccrued = 0;
             int totalLoyaltyPointsRedeemed = 0;
 
-            //ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
-            int seatsTaken = 0;
-
-            string result = "Flight summary for " + FlightRoute.Title;
-
-            foreach (var passenger in Passengers)
-            {
-                switch (passenger.Type)
-                {
-                    case (PassengerType.General):
-                        {                            
-                            break;
-                        }
-                    case (PassengerType.LoyaltyMember):
-                        {
-                            if (passenger.IsUsingLoyaltyPoints)
-                            {
-                                int loyaltyPointsRedeemed = Convert.ToInt32(Math.Ceiling(FlightRoute.BasePrice));
-                                passenger.LoyaltyPoints -= loyaltyPointsRedeemed;
-                                totalLoyaltyPointsRedeemed += loyaltyPointsRedeemed;
-                            }
-                            else
-                            {
-                                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
-                            }
-                            break;
-                        }
-                    case (PassengerType.AirlineEmployee):
-                        {                            
-                            break;
-                        }
-                }
-                costOfFlight += FlightRoute.BaseCost;
-                seatsTaken++;
-            }
+            ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
+            
+            string result = "Flight summary for " + FlightRoute.Title;            
 
             result += VERTICAL_WHITE_SPACE;
 

@@ -45,5 +45,37 @@ namespace FlightBooking.Core.Tests
             Assert.AreEqual(expectedBaggageFromFlight, output);
 
         }
+
+        [TestMethod]
+        public void TestLoyaltyPointsFromFlight()
+        {
+            int totalLoyaltyPointsAccrued;
+            int totalLoyaltyPointsRedeemed;
+            _scheduledFlight.ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
+
+            Assert.AreEqual(10, totalLoyaltyPointsAccrued);
+            Assert.AreEqual(100, totalLoyaltyPointsRedeemed);
+
+        }
+
+        [TestMethod]
+        public void TestFlightCost()
+        {
+            double flightCost = 0;
+
+            flightCost = _scheduledFlight.GetFlightCost();
+
+            Assert.AreEqual(500, flightCost);
+        }
+
+        [TestMethod]
+        public void TestSeatsTaken()
+        {
+            double seatsTaken = 0;
+
+            seatsTaken = _scheduledFlight.GetSeatsTaken();
+
+            Assert.AreEqual(10, seatsTaken);
+        }
     }
 }
