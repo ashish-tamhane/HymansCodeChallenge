@@ -11,23 +11,17 @@ namespace FlightBooking.Core.Classes
         private static string INDENTATION = "    ";
 
         public static string GenerateSummary(IEnumerable<IPassenger> passengers,
-            string flightRouteTitle, int seatsTaken,
-            double profitFromFlight, double costOfFlight,
-            double profitSurplus, int totalLoyaltyPointsAccrued,
-            int totalLoyaltyPointsRedeemed,
-            double aircraftNumberOfSeats,
-            double minimumTakeOffPercentage,
-            int expectedBaggageFromFlight
+            SummaryDetails summaryDetails
             )
         {
             string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
             string NEW_LINE = Environment.NewLine;
 
-            string result = GetResult(flightRouteTitle);
+            string result = GetResult(summaryDetails.flightRouteTitle);
 
             result += VERTICAL_WHITE_SPACE;
 
-            result += GetSeatsTaken(seatsTaken);
+            result += GetSeatsTaken(summaryDetails.seatsTaken);
             result += NEW_LINE;
             result += GetGeneralSales(passengers);
             result += NEW_LINE;
@@ -36,25 +30,26 @@ namespace FlightBooking.Core.Classes
             result += GetAirlineEmployees(passengers);
 
             result += VERTICAL_WHITE_SPACE;
-            result += GetTotalExpectedBaggage(expectedBaggageFromFlight);
+            result += GetTotalExpectedBaggage(summaryDetails.expectedBaggageFromFlight);
 
             result += VERTICAL_WHITE_SPACE;
 
-            result += GetTotalRevenueFromFlight(profitFromFlight);
+            result += GetTotalRevenueFromFlight(summaryDetails.profitFromFlight);
             result += NEW_LINE;
-            result += GetTotalCostFromFlight(costOfFlight);
+            result += GetTotalCostFromFlight(summaryDetails.costOfFlight);
             result += NEW_LINE;
 
-            result += DisplayProfitOrLoss(profitSurplus);
+            result += DisplayProfitOrLoss(summaryDetails.profitSurplus);
 
             result += VERTICAL_WHITE_SPACE;
 
-            result += GetLoyaltyPointsGivenAway(totalLoyaltyPointsAccrued) + NEW_LINE;
-            result += GetTotalLoyaltyPointsRedeemed(totalLoyaltyPointsRedeemed) + NEW_LINE;
+            result += GetLoyaltyPointsGivenAway(summaryDetails.totalLoyaltyPointsAccrued) + NEW_LINE;
+            result += GetTotalLoyaltyPointsRedeemed(summaryDetails.totalLoyaltyPointsRedeemed) + NEW_LINE;
 
             result += VERTICAL_WHITE_SPACE;
 
-            if (FlightProceedCheck(seatsTaken, profitSurplus, aircraftNumberOfSeats, minimumTakeOffPercentage))
+            if (FlightProceedCheck(summaryDetails.seatsTaken, summaryDetails.profitSurplus, summaryDetails.aircraftNumberOfSeats, 
+                summaryDetails.flightRouteMinimumTakeOffPercentage))
                 result += "THIS FLIGHT MAY PROCEED";
             else
                 result += "FLIGHT MAY NOT PROCEED";

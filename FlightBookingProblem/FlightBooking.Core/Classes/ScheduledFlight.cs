@@ -7,13 +7,18 @@ namespace FlightBooking.Core.Classes
 {
     public class ScheduledFlight : IScheduledFlight
     {
-
+        //Loyalty points calculation should be outside ScheduledFlight
         private readonly ILoyaltyPointsCalculator loyaltyCalculator;
+
+        //Profit calculation should be outside ScheduledFlight
         private readonly IProfitCalculator profitCalculator;
+
+        private readonly IPlane Aircraft;
+        private readonly List<IPassenger> passengers;
         private readonly IBaggageCalculator baggageCalculator;
         private readonly IFlightRoute flightRoute;
-        private IPlane Aircraft;
-        private readonly List<IPassenger> passengers;
+        
+        
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
@@ -21,7 +26,8 @@ namespace FlightBooking.Core.Classes
         public ScheduledFlight(IFlightRoute flightRoute,
             ILoyaltyPointsCalculator loyaltyCalculator,
             IProfitCalculator profitCalculator,
-            IBaggageCalculator baggageCalculator
+            IBaggageCalculator baggageCalculator,
+            IPlane plane
             )
         {
             this.flightRoute = flightRoute;
@@ -29,6 +35,7 @@ namespace FlightBooking.Core.Classes
             this.profitCalculator = profitCalculator;
             this.baggageCalculator = baggageCalculator;
             passengers = new List<IPassenger>();
+            Aircraft = plane;
         }
 
         public void AddPassenger(IPassenger passenger)
@@ -47,10 +54,6 @@ namespace FlightBooking.Core.Classes
             passengers.ToList().ForEach(p => AddPassenger(p));
         }
 
-        public void SetAircraftForRoute(Plane aircraft)
-        {
-            Aircraft = aircraft;
-        }
 
         public int GetExpectedBaggageFromFlight()
         {
@@ -89,19 +92,21 @@ namespace FlightBooking.Core.Classes
             int aircraftNumberOfSeats = Aircraft.NumberOfSeats;
             double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
 
-            return SummaryGenerator.GenerateSummary(passengers, flightRouteTitle, 
-                seatsTaken, profitFromFlight, costOfFlight, 
-                profitSurplus, TotalLoyaltyPointsAccrued, TotalLoyaltyPointsRedeemed, aircraftNumberOfSeats,
-                flightRouteMinimumTakeOffPercentage, expectedBaggageFromFlight);
+            SummaryDetails summaryDetails = new SummaryDetails()
+            {
+                costOfFlight = costOfFlight,
+                profitFromFlight = profitFromFlight,
+                seatsTaken = seatsTaken,
+                profitSurplus = profitSurplus,
+                expectedBaggageFromFlight = expectedBaggageFromFlight,
+                flightRouteTitle = flightRouteTitle,
+                aircraftNumberOfSeats = aircraftNumberOfSeats,
+                flightRouteMinimumTakeOffPercentage = flightRouteMinimumTakeOffPercentage,
+                totalLoyaltyPointsAccrued = TotalLoyaltyPointsAccrued,
+                totalLoyaltyPointsRedeemed = TotalLoyaltyPointsRedeemed
+            };
+
+            return SummaryGenerator.GenerateSummary(passengers, summaryDetails);
         }
-
-
-
-
-
-
-
-
-
     }
 }

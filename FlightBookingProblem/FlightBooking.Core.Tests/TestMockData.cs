@@ -147,10 +147,11 @@ THIS FLIGHT MAY PROCEED";
                 MinimumTakeOffPercentage = 0.7
             };
 
-            _scheduledFlight = new ScheduledFlight(londonToParis, new LoyaltyCalculator(), new ProfitCalculator(), new BaggageCalculator());
-
-            _scheduledFlight.SetAircraftForRoute(
-                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
+            _scheduledFlight = new ScheduledFlight(londonToParis, 
+                new LoyaltyCalculator(), 
+                new ProfitCalculator(), 
+                new BaggageCalculator(),
+                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });            
 
             _scheduledFlight.AddPassengers(GetPassengers());
 

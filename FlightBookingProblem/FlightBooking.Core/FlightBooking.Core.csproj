@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Classes\BaggageCalculator.cs" />
     <Compile Include="Classes\FlightRoute.cs" />
+    <Compile Include="Classes\SummaryDetails.cs" />
     <Compile Include="Interfaces\IBaggageCalculator.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
     <Compile Include="Interfaces\IFlightRoute.cs" />
