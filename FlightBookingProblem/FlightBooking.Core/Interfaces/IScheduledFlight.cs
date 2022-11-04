@@ -4,8 +4,7 @@ namespace FlightBooking.Core.Interfaces
 {
     public interface IScheduledFlight
     {
-        IPlane Aircraft { get; }
-        IFlightRoute FlightRoute { get; }
+        //IPlane Aircraft { get; }        
         List<IPassenger> Passengers { get; }
 
         void AddPassenger(IPassenger passenger);

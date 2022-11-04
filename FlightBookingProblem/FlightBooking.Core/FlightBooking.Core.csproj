@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaggageCalculator.cs" />
     <Compile Include="FlightRoute.cs" />
+    <Compile Include="Interfaces\IBaggageCalculator.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
     <Compile Include="Interfaces\IFlightRoute.cs" />
     <Compile Include="Interfaces\IPassenger.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="ProfitCalculator.cs" />
     <Compile Include="ScheduledFlight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SummaryGenerator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

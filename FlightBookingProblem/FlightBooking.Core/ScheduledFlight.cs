@@ -7,30 +7,38 @@ namespace FlightBooking.Core
 {
     public class ScheduledFlight : IScheduledFlight
     {
-        private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
-        private readonly string NEW_LINE = Environment.NewLine;
+        
+        
         private readonly ILoyaltyPointsCalculator loyaltyCalculator;
         private readonly IProfitCalculator profitCalculator;
-        private const string INDENTATION = "    ";
+        private readonly IBaggageCalculator baggageCalculator;
+        private readonly IFlightRoute flightRoute;
+        private IPlane Aircraft;
+
+        
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public ScheduledFlight(IFlightRoute flightRoute, ILoyaltyPointsCalculator loyaltyCalculator, IProfitCalculator profitCalculator)
+        public ScheduledFlight(IFlightRoute flightRoute, 
+            ILoyaltyPointsCalculator loyaltyCalculator, 
+            IProfitCalculator profitCalculator,
+            IBaggageCalculator baggageCalculator
+            )
         {
-            FlightRoute = flightRoute;
+            this.flightRoute = flightRoute;
             this.loyaltyCalculator = loyaltyCalculator;
             this.profitCalculator = profitCalculator;
+            this.baggageCalculator = baggageCalculator;
             Passengers = new List<IPassenger>();
         }
 
-        public IFlightRoute FlightRoute { get; private set; }
-        public IPlane Aircraft { get; private set; }
+        
         public List<IPassenger> Passengers { get; private set; }
 
         public void AddPassenger(IPassenger passenger)
         {
-            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued))
+            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, flightRoute, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued))
             {
                 TotalLoyaltyPointsRedeemed += totalLoyaltyPointsRedeemed;
                 TotalLoyaltyPointsAccrued += totalLoyaltyPointsAccrued;
@@ -46,18 +54,18 @@ namespace FlightBooking.Core
 
         public int GetExpectedBaggageFromFlight()
         {
-            return Passengers.Sum(p => { return p.Type == PassengerType.LoyaltyMember ? 2 : 1; });
+            return baggageCalculator.CalculateBaggage(Passengers);            
         }
 
         public double GetExpectedProfitFromFlight()
         {
-            return profitCalculator.CalculateProfit(Passengers, FlightRoute.BasePrice);
+            return profitCalculator.CalculateProfit(Passengers, flightRoute.BasePrice);
         }
 
 
         public double GetFlightCost()
         {
-            return Passengers.Sum(p => FlightRoute.BaseCost);
+            return Passengers.Sum(p => flightRoute.BaseCost);
         }
 
         public int GetSeatsTaken()
@@ -65,53 +73,27 @@ namespace FlightBooking.Core
             return Passengers.Count();
         }
 
+        private static double GetProfitSurplus(double costOfFlight, double profitFromFlight)
+        {
+            return profitFromFlight - costOfFlight;
+        }
+
         public string GetSummary()
         {
             double costOfFlight = GetFlightCost();
             double profitFromFlight = GetExpectedProfitFromFlight();
             int seatsTaken = GetSeatsTaken();
-            double profitSurplus = profitFromFlight - costOfFlight;
+            double profitSurplus = GetProfitSurplus(costOfFlight, profitFromFlight);
 
-            string result = "Flight summary for " + FlightRoute.Title;
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += "Total passengers: " + seatsTaken;
-            result += NEW_LINE;
-            result += INDENTATION + "General sales: " + Passengers.Count(p => p.Type == PassengerType.General);
-            result += NEW_LINE;
-            result += INDENTATION + "Loyalty member sales: " + Passengers.Count(p => p.Type == PassengerType.LoyaltyMember);
-            result += NEW_LINE;
-            result += INDENTATION + "Airline employee comps: " + Passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
-
-            result += VERTICAL_WHITE_SPACE;
-            result += "Total expected baggage: " + GetExpectedBaggageFromFlight();
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += "Total revenue from flight: " + profitFromFlight;
-            result += NEW_LINE;
-            result += "Total costs from flight: " + costOfFlight;
-            result += NEW_LINE;
-            
-            result += (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += "Total loyalty points given away: " + TotalLoyaltyPointsAccrued + NEW_LINE;
-            result += "Total loyalty points redeemed: " + TotalLoyaltyPointsRedeemed + NEW_LINE;
-
-            result += VERTICAL_WHITE_SPACE;
-
-            if (profitSurplus > 0 &&
-                seatsTaken < Aircraft.NumberOfSeats &&
-                seatsTaken / (double)Aircraft.NumberOfSeats > FlightRoute.MinimumTakeOffPercentage)
-                result += "THIS FLIGHT MAY PROCEED";
-            else
-                result += "FLIGHT MAY NOT PROCEED";
-
-            return result;
+            return SummaryGenerator.GenerateSummary(Passengers, flightRoute.Title, seatsTaken, profitFromFlight, costOfFlight, profitSurplus, TotalLoyaltyPointsAccrued, TotalLoyaltyPointsRedeemed, Aircraft.NumberOfSeats, flightRoute.MinimumTakeOffPercentage, GetExpectedBaggageFromFlight());
         }
+
+        
+
+       
+
+
+
 
 
     }
