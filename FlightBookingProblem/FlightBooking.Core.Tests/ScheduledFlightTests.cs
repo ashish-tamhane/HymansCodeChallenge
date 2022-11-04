@@ -30,7 +30,7 @@ namespace FlightBooking.Core.Tests
         public void TestBaggageFromFlight()
         {
             int output = _scheduledFlight.GetExpectedBaggageFromFlight();
-            int expectedBaggageFromFlight = 3;
+            int expectedBaggageFromFlight = 13;
 
             Assert.AreEqual(expectedBaggageFromFlight, output);
 
@@ -40,7 +40,7 @@ namespace FlightBooking.Core.Tests
         public void TestProfitFromFlight()
         {
             double output = _scheduledFlight.GetExpectedProfitFromFlight();
-            double expectedBaggageFromFlight = 300;
+            double expectedBaggageFromFlight = 800;
 
             Assert.AreEqual(expectedBaggageFromFlight, output);
 

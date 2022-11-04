@@ -10,22 +10,22 @@ namespace FlightBooking.Core.Tests
     {
         public static string ExpectedConsoleOutput = @"Flight summary for London to Paris
 
-Total passengers: 3
-    General sales: 3
-    Loyalty member sales: 0
-    Airline employee comps: 0
+Total passengers: 10
+    General sales: 6
+    Loyalty member sales: 3
+    Airline employee comps: 1
 
-Total expected baggage: 3
+Total expected baggage: 13
 
-Total revenue from flight: 300
-Total costs from flight: 150
-Flight generating profit of: 150
+Total revenue from flight: 800
+Total costs from flight: 500
+Flight generating profit of: 300
 
-Total loyalty points given away: 0
-Total loyalty points redeemed: 0
+Total loyalty points given away: 10
+Total loyalty points redeemed: 100
 
 
-FLIGHT MAY NOT PROCEED";
+THIS FLIGHT MAY PROCEED";
 
         public static void SetupAirlineData(out ScheduledFlight _scheduledFlight)
         {
@@ -44,22 +44,77 @@ FLIGHT MAY NOT PROCEED";
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
-                Name = "Passenger1",
-                Age = 35
+                Name = "Steve",
+                Age = 30
             });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
-                Name = "Passenger2",
-                Age = 40
+                Name = "Mark",
+                Age = 12
             });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
-                Name = "Passenger3",
-                Age = 45
+                Name = "James",
+                Age = 36
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Jane",
+                Age = 32
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "John",
+                Age = 29,
+                LoyaltyPoints = 1000,
+                IsUsingLoyaltyPoints = true,
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Sarah",
+                Age = 45,
+                LoyaltyPoints = 1250,
+                IsUsingLoyaltyPoints = false,
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Jack",
+                Age = 60,
+                LoyaltyPoints = 50,
+                IsUsingLoyaltyPoints = false,
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.AirlineEmployee,
+                Name = "Trevor",
+                Age = 47,
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Alan",
+                Age = 34
+            });
+
+            _scheduledFlight.AddPassenger(new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Suzy",
+                Age = 21
             });
         }
     }

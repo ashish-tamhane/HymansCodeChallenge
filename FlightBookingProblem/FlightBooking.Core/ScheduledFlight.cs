@@ -44,12 +44,45 @@ namespace FlightBooking.Core
                                                                 : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));            
         }
 
+        private void ComputeLoyaltyPoints(out int totalLoyaltyPointsAccrued, out int totalLoyaltyPointsRedeemed)
+        {
+            int _totalLoyaltyPointsAccrued = 0;
+            int _totalLoyaltyPointsRedeemed = 0;
+
+            Passengers.Where(p => p.Type == PassengerType.LoyaltyMember).ToList().ForEach(p =>
+                {
+                    ComputeLoyaltyPoints(p, out _totalLoyaltyPointsAccrued, out _totalLoyaltyPointsRedeemed);
+                });
+
+            totalLoyaltyPointsAccrued = _totalLoyaltyPointsAccrued;
+            totalLoyaltyPointsRedeemed = _totalLoyaltyPointsRedeemed;
+        }
+
+        private void ComputeLoyaltyPoints(Passenger p, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued)
+        {
+            totalLoyaltyPointsRedeemed = 0;
+            totalLoyaltyPointsAccrued = 0;
+
+            if (p.IsUsingLoyaltyPoints)
+            {
+                int loyaltyPointsRedeemed = Convert.ToInt32(Math.Ceiling(FlightRoute.BasePrice));
+                p.LoyaltyPoints -= loyaltyPointsRedeemed;
+                totalLoyaltyPointsRedeemed += loyaltyPointsRedeemed;
+            }
+            else
+            {
+                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
+            }
+        }
+
         public string GetSummary()
         {
             double costOfFlight = 0;
             double profitFromFlight = GetExpectedProfitFromFlight();
             int totalLoyaltyPointsAccrued = 0;
-            int totalLoyaltyPointsRedeemed = 0;            
+            int totalLoyaltyPointsRedeemed = 0;
+
+            //ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
             int seatsTaken = 0;
 
             string result = "Flight summary for " + FlightRoute.Title;
@@ -72,8 +105,8 @@ namespace FlightBooking.Core
                             }
                             else
                             {
-                                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;                                
-                            }                            
+                                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
+                            }
                             break;
                         }
                     case (PassengerType.AirlineEmployee):
