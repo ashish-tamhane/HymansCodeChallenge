@@ -28,6 +28,78 @@ Total loyalty points redeemed: 100
 
 THIS FLIGHT MAY PROCEED";
 
+        public static List<IPassenger> GetPassengers()
+        {
+            var passengersArray = new[] { new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Steve",
+                Age = 30
+            }, new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Mark",
+                Age = 12
+            }, new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "James",
+                Age = 36
+            }, new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Jane",
+                Age = 32
+            }, new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "John",
+                Age = 29,
+                LoyaltyPoints = 1000,
+                IsUsingLoyaltyPoints = true,
+            }, new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Sarah",
+                Age = 45,
+                LoyaltyPoints = 1250,
+                IsUsingLoyaltyPoints = false,
+            },
+
+            new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Jack",
+                Age = 60,
+                LoyaltyPoints = 50,
+                IsUsingLoyaltyPoints = false,
+            }, new Passenger
+            {
+                Type = PassengerType.AirlineEmployee,
+                Name = "Trevor",
+                Age = 47,
+            },
+
+            new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Alan",
+                Age = 34
+            },
+
+            new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Suzy",
+                Age = 21
+            } };
+
+            List<IPassenger> passengers = new List<IPassenger>();
+            passengers.AddRange(passengersArray);
+
+            return passengers;
+        }
+
         public static void SetupAirlineData(out ScheduledFlight _scheduledFlight)
         {
             FlightRoute londonToParis = new FlightRoute("London", "Paris")
@@ -42,81 +114,10 @@ THIS FLIGHT MAY PROCEED";
 
             _scheduledFlight.SetAircraftForRoute(
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "Steve",
-                Age = 30
-            });
 
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "Mark",
-                Age = 12
-            });
+            _scheduledFlight.AddPassengers(GetPassengers());
 
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "James",
-                Age = 36
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "Jane",
-                Age = 32
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.LoyaltyMember,
-                Name = "John",
-                Age = 29,
-                LoyaltyPoints = 1000,
-                IsUsingLoyaltyPoints = true,
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.LoyaltyMember,
-                Name = "Sarah",
-                Age = 45,
-                LoyaltyPoints = 1250,
-                IsUsingLoyaltyPoints = false,
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.LoyaltyMember,
-                Name = "Jack",
-                Age = 60,
-                LoyaltyPoints = 50,
-                IsUsingLoyaltyPoints = false,
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.AirlineEmployee,
-                Name = "Trevor",
-                Age = 47,
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "Alan",
-                Age = 34
-            });
-
-            _scheduledFlight.AddPassenger(new Passenger
-            {
-                Type = PassengerType.General,
-                Name = "Suzy",
-                Age = 21
-            });
+            
         }
     }
 }

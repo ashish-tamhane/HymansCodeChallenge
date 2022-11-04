@@ -45,6 +45,7 @@
     <Compile Include="TestMockData.cs" />
     <Compile Include="ScheduledFlightTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaggageCalculatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">

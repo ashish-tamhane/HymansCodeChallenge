@@ -7,21 +7,19 @@ namespace FlightBooking.Core
 {
     public class ScheduledFlight : IScheduledFlight
     {
-        
-        
+
         private readonly ILoyaltyPointsCalculator loyaltyCalculator;
         private readonly IProfitCalculator profitCalculator;
         private readonly IBaggageCalculator baggageCalculator;
         private readonly IFlightRoute flightRoute;
         private IPlane Aircraft;
-
-        
+        private readonly List<IPassenger> passengers;
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public ScheduledFlight(IFlightRoute flightRoute, 
-            ILoyaltyPointsCalculator loyaltyCalculator, 
+        public ScheduledFlight(IFlightRoute flightRoute,
+            ILoyaltyPointsCalculator loyaltyCalculator,
             IProfitCalculator profitCalculator,
             IBaggageCalculator baggageCalculator
             )
@@ -30,11 +28,8 @@ namespace FlightBooking.Core
             this.loyaltyCalculator = loyaltyCalculator;
             this.profitCalculator = profitCalculator;
             this.baggageCalculator = baggageCalculator;
-            Passengers = new List<IPassenger>();
+            passengers = new List<IPassenger>();
         }
-
-        
-        public List<IPassenger> Passengers { get; private set; }
 
         public void AddPassenger(IPassenger passenger)
         {
@@ -44,7 +39,12 @@ namespace FlightBooking.Core
                 TotalLoyaltyPointsAccrued += totalLoyaltyPointsAccrued;
             }
 
-            Passengers.Add(passenger);
+            passengers.Add(passenger);
+        }
+
+        public void AddPassengers(IEnumerable<IPassenger> passengers)
+        {
+            passengers.ToList().ForEach(p => AddPassenger(p));
         }
 
         public void SetAircraftForRoute(Plane aircraft)
@@ -54,23 +54,23 @@ namespace FlightBooking.Core
 
         public int GetExpectedBaggageFromFlight()
         {
-            return baggageCalculator.CalculateBaggage(Passengers);            
+            return baggageCalculator.CalculateBaggage(passengers);
         }
 
         public double GetExpectedProfitFromFlight()
         {
-            return profitCalculator.CalculateProfit(Passengers, flightRoute.BasePrice);
+            return profitCalculator.CalculateProfit(passengers, flightRoute.BasePrice);
         }
 
 
         public double GetFlightCost()
         {
-            return Passengers.Sum(p => flightRoute.BaseCost);
+            return passengers.Sum(p => flightRoute.BaseCost);
         }
 
         public int GetSeatsTaken()
         {
-            return Passengers.Count();
+            return passengers.Count();
         }
 
         private static double GetProfitSurplus(double costOfFlight, double profitFromFlight)
@@ -84,13 +84,20 @@ namespace FlightBooking.Core
             double profitFromFlight = GetExpectedProfitFromFlight();
             int seatsTaken = GetSeatsTaken();
             double profitSurplus = GetProfitSurplus(costOfFlight, profitFromFlight);
+            int expectedBaggageFromFlight = GetExpectedBaggageFromFlight();
+            string flightRouteTitle = flightRoute.Title;
+            int aircraftNumberOfSeats = Aircraft.NumberOfSeats;
+            double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
 
-            return SummaryGenerator.GenerateSummary(Passengers, flightRoute.Title, seatsTaken, profitFromFlight, costOfFlight, profitSurplus, TotalLoyaltyPointsAccrued, TotalLoyaltyPointsRedeemed, Aircraft.NumberOfSeats, flightRoute.MinimumTakeOffPercentage, GetExpectedBaggageFromFlight());
+            return SummaryGenerator.GenerateSummary(passengers, flightRouteTitle, 
+                seatsTaken, profitFromFlight, costOfFlight, 
+                profitSurplus, TotalLoyaltyPointsAccrued, TotalLoyaltyPointsRedeemed, aircraftNumberOfSeats,
+                flightRouteMinimumTakeOffPercentage, expectedBaggageFromFlight);
         }
 
-        
 
-       
+
+
 
 
 
