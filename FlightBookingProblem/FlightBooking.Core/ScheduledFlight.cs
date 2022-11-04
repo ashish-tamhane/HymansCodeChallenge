@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using FlightBooking.Core.Interfaces;
 
 namespace FlightBooking.Core
 {
-    public class ScheduledFlight
+    public class ScheduledFlight : IScheduledFlight
     {
         private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
         private readonly string NEW_LINE = Environment.NewLine;
@@ -29,14 +30,18 @@ namespace FlightBooking.Core
         {
             Aircraft = aircraft;
         }
-        
+
+        public int GetExpectedBaggageFromFlight()
+        {
+            return Passengers.Sum(p => { return p.Type == PassengerType.LoyaltyMember ? 2 : 1; });
+        }        
+
         public string GetSummary()
         {
             double costOfFlight = 0;
             double profitFromFlight = 0;
             int totalLoyaltyPointsAccrued = 0;
-            int totalLoyaltyPointsRedeemed = 0;
-            int totalExpectedBaggage = 0;
+            int totalLoyaltyPointsRedeemed = 0;            
             int seatsTaken = 0;
 
             string result = "Flight summary for " + FlightRoute.Title;
@@ -45,13 +50,12 @@ namespace FlightBooking.Core
             {
                 switch (passenger.Type)
                 {
-                    case(PassengerType.General):
+                    case (PassengerType.General):
                         {
-                            profitFromFlight += FlightRoute.BasePrice;
-                            totalExpectedBaggage++;
+                            profitFromFlight += FlightRoute.BasePrice;                            
                             break;
                         }
-                    case(PassengerType.LoyaltyMember):
+                    case (PassengerType.LoyaltyMember):
                         {
                             if (passenger.IsUsingLoyaltyPoints)
                             {
@@ -62,14 +66,12 @@ namespace FlightBooking.Core
                             else
                             {
                                 totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
-                                profitFromFlight += FlightRoute.BasePrice;                           
-                            }
-                            totalExpectedBaggage += 2;
+                                profitFromFlight += FlightRoute.BasePrice;
+                            }                            
                             break;
                         }
-                    case(PassengerType.AirlineEmployee):
-                        {
-                            totalExpectedBaggage += 1;
+                    case (PassengerType.AirlineEmployee):
+                        {                            
                             break;
                         }
                 }
@@ -78,7 +80,7 @@ namespace FlightBooking.Core
             }
 
             result += VERTICAL_WHITE_SPACE;
-            
+
             result += "Total passengers: " + seatsTaken;
             result += NEW_LINE;
             result += INDENTATION + "General sales: " + Passengers.Count(p => p.Type == PassengerType.General);
@@ -86,9 +88,9 @@ namespace FlightBooking.Core
             result += INDENTATION + "Loyalty member sales: " + Passengers.Count(p => p.Type == PassengerType.LoyaltyMember);
             result += NEW_LINE;
             result += INDENTATION + "Airline employee comps: " + Passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
-            
+
             result += VERTICAL_WHITE_SPACE;
-            result += "Total expected baggage: " + totalExpectedBaggage;
+            result += "Total expected baggage: " + GetExpectedBaggageFromFlight();
 
             result += VERTICAL_WHITE_SPACE;
 
@@ -108,8 +110,8 @@ namespace FlightBooking.Core
 
             result += VERTICAL_WHITE_SPACE;
 
-            if (profitSurplus > 0 && 
-                seatsTaken < Aircraft.NumberOfSeats && 
+            if (profitSurplus > 0 &&
+                seatsTaken < Aircraft.NumberOfSeats &&
                 seatsTaken / (double)Aircraft.NumberOfSeats > FlightRoute.MinimumTakeOffPercentage)
                 result += "THIS FLIGHT MAY PROCEED";
             else

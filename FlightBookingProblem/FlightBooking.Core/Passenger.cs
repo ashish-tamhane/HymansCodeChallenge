@@ -1,6 +1,8 @@
-﻿namespace FlightBooking.Core
+﻿using FlightBooking.Core.Interfaces;
+
+namespace FlightBooking.Core
 {
-    public class Passenger
+    public class Passenger : IPassenger
     {
         public string Name { get; set; }
         public int Age { get; set; }
@@ -9,12 +11,5 @@
         public bool IsUsingLoyaltyPoints { get; set; }
 
         public PassengerType Type { get; set; }
-    }
-    
-    public enum PassengerType
-    {
-        General,
-        LoyaltyMember,
-        AirlineEmployee
     }
 }

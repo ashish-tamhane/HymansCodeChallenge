@@ -1,6 +1,8 @@
-﻿namespace FlightBooking.Core
+﻿using FlightBooking.Core.Interfaces;
+
+namespace FlightBooking.Core
 {
-    public class FlightRoute
+    public class FlightRoute : IFlightRoute
     {
         private readonly string _origin;
         private readonly string _destination;
@@ -15,6 +17,6 @@
         public double BasePrice { get; set; }
         public double BaseCost { get; set; }
         public int LoyaltyPointsGained { get; set; }
-        public double MinimumTakeOffPercentage { get; set; }        
+        public double MinimumTakeOffPercentage { get; set; }
     }
 }

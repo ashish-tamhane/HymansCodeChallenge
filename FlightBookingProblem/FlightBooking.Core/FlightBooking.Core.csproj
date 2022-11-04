@@ -40,11 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlightRoute.cs" />
+    <Compile Include="Interfaces\IFlightRoute.cs" />
+    <Compile Include="Interfaces\IPassenger.cs" />
+    <Compile Include="Interfaces\IPlane.cs" />
+    <Compile Include="Interfaces\IScheduledFlight.cs" />
     <Compile Include="Passenger.cs" />
+    <Compile Include="PassengerType.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="ScheduledFlight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
