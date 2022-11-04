@@ -28,6 +28,42 @@ Total loyalty points redeemed: 100
 
 THIS FLIGHT MAY PROCEED";
 
+        public static List<IPassenger> GetEachPassenger()
+        {
+            var passengersArray = new[] { new Passenger
+            {
+                Type = PassengerType.General,
+                Name = "Steve",
+                Age = 30
+            },
+            new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Black",
+                Age = 60,
+                LoyaltyPoints = 50,
+                IsUsingLoyaltyPoints = true,
+            },
+            new Passenger
+            {
+                Type = PassengerType.LoyaltyMember,
+                Name = "Jack",
+                Age = 60,
+                LoyaltyPoints = 50,
+                IsUsingLoyaltyPoints = false,
+            }, new Passenger
+            {
+                Type = PassengerType.AirlineEmployee,
+                Name = "Trevor",
+                Age = 47,
+            }};
+
+            List<IPassenger> passengers = new List<IPassenger>();
+            passengers.AddRange(passengersArray);
+
+            return passengers;
+        }
+
         public static List<IPassenger> GetPassengers()
         {
             var passengersArray = new[] { new Passenger
