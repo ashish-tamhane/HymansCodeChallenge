@@ -48,13 +48,9 @@ namespace FlightBooking.Core.Tests
 
         [TestMethod]
         public void TestLoyaltyPointsFromFlight()
-        {
-            int totalLoyaltyPointsAccrued;
-            int totalLoyaltyPointsRedeemed;
-            _scheduledFlight.ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
-
-            Assert.AreEqual(10, totalLoyaltyPointsAccrued);
-            Assert.AreEqual(100, totalLoyaltyPointsRedeemed);
+        {            
+            Assert.AreEqual(10, _scheduledFlight.TotalLoyaltyPointsAccrued);
+            Assert.AreEqual(100, _scheduledFlight.TotalLoyaltyPointsRedeemed);
 
         }
 

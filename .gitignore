@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FlightBookingProblem/FlightBooking.Core.Tests/bin/Debug
+/FlightBookingProblem/FlightBooking.Core.Tests/obj
+/FlightBookingProblem/FlightBookingConsole/bin/Debug
+/FlightBookingProblem/FlightBookingConsole/obj
+/FlightBookingProblem/FlightBooking.Core/bin/Debug
+/FlightBookingProblem/FlightBooking.Core/obj
+/FlightBookingProblem/.vs/FlightBookingProblem/v16
+/.vs

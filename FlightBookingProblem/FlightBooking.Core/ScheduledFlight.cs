@@ -9,20 +9,34 @@ namespace FlightBooking.Core
     {
         private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
         private readonly string NEW_LINE = Environment.NewLine;
+        private int totalLoyaltyPointsAccrued;
+        private int totalLoyaltyPointsRedeemed;
         private const string INDENTATION = "    ";
 
-        public ScheduledFlight(FlightRoute flightRoute)
+        public int TotalLoyaltyPointsAccrued { get; set; }
+        public int TotalLoyaltyPointsRedeemed { get; set; }
+
+        public ScheduledFlight(IFlightRoute flightRoute)
         {
             FlightRoute = flightRoute;
-            Passengers = new List<Passenger>();
+            Passengers = new List<IPassenger>();
         }
 
-        public FlightRoute FlightRoute { get; private set; }
-        public Plane Aircraft { get; private set; }
-        public List<Passenger> Passengers { get; private set; }
+        public IFlightRoute FlightRoute { get; private set; }
+        public IPlane Aircraft { get; private set; }
+        public List<IPassenger> Passengers { get; private set; }
 
-        public void AddPassenger(Passenger passenger)
+        public void AddPassenger(IPassenger passenger, ILoyaltyPointsCalculator loyaltyCalculator)
         {
+            int totalLoyaltyPointsAccrued;
+            int totalLoyaltyPointsRedeemed;
+            
+            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed))
+            {
+                TotalLoyaltyPointsRedeemed += totalLoyaltyPointsRedeemed;
+                TotalLoyaltyPointsAccrued += totalLoyaltyPointsAccrued;
+            }
+
             Passengers.Add(passenger);
         }
 
@@ -41,28 +55,9 @@ namespace FlightBooking.Core
             return Passengers.Sum(p =>
                         p.Type == PassengerType.AirlineEmployee ? 0
                                                     : (p.Type == PassengerType.General ? FlightRoute.BasePrice
-                                                                : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));            
+                                                                : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));
         }
 
-        public void ComputeLoyaltyPoints(out int totalLoyaltyPointsAccrued, out int totalLoyaltyPointsRedeemed)
-        {
-            totalLoyaltyPointsAccrued = 0;
-            totalLoyaltyPointsRedeemed = 0;
-
-            foreach (var passenger in Passengers.Where(p => p.Type == PassengerType.LoyaltyMember))
-            {
-                if (passenger.IsUsingLoyaltyPoints)
-                {
-                    int loyaltyPointsRedeemed = Convert.ToInt32(Math.Ceiling(FlightRoute.BasePrice));
-                    passenger.LoyaltyPoints -= loyaltyPointsRedeemed;
-                    totalLoyaltyPointsRedeemed += loyaltyPointsRedeemed;
-                }
-                else
-                {
-                    totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
-                }
-            }
-        }
 
         public double GetFlightCost()
         {
@@ -80,12 +75,7 @@ namespace FlightBooking.Core
             double profitFromFlight = GetExpectedProfitFromFlight();
             int seatsTaken = GetSeatsTaken();
 
-            int totalLoyaltyPointsAccrued = 0;
-            int totalLoyaltyPointsRedeemed = 0;
-
-            ComputeLoyaltyPoints(out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed);
-            
-            string result = "Flight summary for " + FlightRoute.Title;            
+            string result = "Flight summary for " + FlightRoute.Title;
 
             result += VERTICAL_WHITE_SPACE;
 
@@ -113,8 +103,8 @@ namespace FlightBooking.Core
 
             result += VERTICAL_WHITE_SPACE;
 
-            result += "Total loyalty points given away: " + totalLoyaltyPointsAccrued + NEW_LINE;
-            result += "Total loyalty points redeemed: " + totalLoyaltyPointsRedeemed + NEW_LINE;
+            result += "Total loyalty points given away: " + TotalLoyaltyPointsAccrued + NEW_LINE;
+            result += "Total loyalty points redeemed: " + TotalLoyaltyPointsRedeemed + NEW_LINE;
 
             result += VERTICAL_WHITE_SPACE;
 
@@ -128,6 +118,6 @@ namespace FlightBooking.Core
             return result;
         }
 
-        
+
     }
 }

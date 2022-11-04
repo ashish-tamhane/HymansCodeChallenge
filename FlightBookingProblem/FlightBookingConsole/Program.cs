@@ -1,5 +1,6 @@
 ﻿using System;
 using FlightBooking.Core;
+using FlightBooking.Core.Interfaces;
 
 namespace FlightBookingProblem
 {
@@ -29,7 +30,7 @@ namespace FlightBookingProblem
                         Type = PassengerType.General, 
                         Name = passengerSegments[2], 
                         Age = Convert.ToInt32(passengerSegments[3])
-                    });
+                    }, new LoyaltyCalculator());
                 }
                 else if (enteredText.Contains("add loyalty"))
                 {
@@ -41,7 +42,7 @@ namespace FlightBookingProblem
                         Age = Convert.ToInt32(passengerSegments[3]),
                         LoyaltyPoints = Convert.ToInt32(passengerSegments[4]),
                         IsUsingLoyaltyPoints = Convert.ToBoolean(passengerSegments[5]),
-                    });
+                    }, new LoyaltyCalculator());
                 }
                 else if (enteredText.Contains("add airline"))
                 {
@@ -51,7 +52,7 @@ namespace FlightBookingProblem
                         Type = PassengerType.AirlineEmployee, 
                         Name = passengerSegments[2], 
                         Age = Convert.ToInt32(passengerSegments[3]),
-                    });
+                    }, new LoyaltyCalculator());
                 }
                 else if (enteredText.Contains("exit"))
                 {
