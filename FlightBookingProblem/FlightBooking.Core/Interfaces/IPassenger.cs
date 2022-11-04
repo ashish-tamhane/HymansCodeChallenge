@@ -1,4 +1,6 @@
-﻿namespace FlightBooking.Core.Interfaces
+﻿using FlightBooking.Core.Classes;
+
+namespace FlightBooking.Core.Interfaces
 {
     public interface IPassenger
     {

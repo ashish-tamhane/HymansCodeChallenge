@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FlightBooking.Core
+namespace FlightBooking.Core.Classes
 {
     public static class SummaryGenerator
     {

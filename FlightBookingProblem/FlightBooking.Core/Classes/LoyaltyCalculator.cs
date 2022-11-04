@@ -1,6 +1,7 @@
-﻿using System;
+﻿using FlightBooking.Core.Interfaces;
+using System;
 
-namespace FlightBooking.Core.Interfaces
+namespace FlightBooking.Core.Classes
 {
     public class LoyaltyCalculator : ILoyaltyPointsCalculator
     {

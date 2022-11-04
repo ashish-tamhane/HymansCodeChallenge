@@ -47,6 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaggageCalculatorTests.cs" />
     <Compile Include="ProfitCalculatorTests.cs" />
+    <Compile Include="LoyaltyCalculatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">

@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaggageCalculator.cs" />
-    <Compile Include="FlightRoute.cs" />
+    <Compile Include="Classes\BaggageCalculator.cs" />
+    <Compile Include="Classes\FlightRoute.cs" />
     <Compile Include="Interfaces\IBaggageCalculator.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
     <Compile Include="Interfaces\IFlightRoute.cs" />
@@ -48,14 +48,14 @@
     <Compile Include="Interfaces\IPlane.cs" />
     <Compile Include="Interfaces\IScheduledFlight.cs" />
     <Compile Include="Interfaces\IProfitCalculator.cs" />
-    <Compile Include="LoyaltyCalculator.cs" />
-    <Compile Include="Passenger.cs" />
-    <Compile Include="PassengerType.cs" />
-    <Compile Include="Plane.cs" />
-    <Compile Include="ProfitCalculator.cs" />
-    <Compile Include="ScheduledFlight.cs" />
+    <Compile Include="Classes\LoyaltyCalculator.cs" />
+    <Compile Include="Classes\Passenger.cs" />
+    <Compile Include="Classes\PassengerType.cs" />
+    <Compile Include="Classes\Plane.cs" />
+    <Compile Include="Classes\ProfitCalculator.cs" />
+    <Compile Include="Classes\ScheduledFlight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SummaryGenerator.cs" />
+    <Compile Include="Classes\SummaryGenerator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

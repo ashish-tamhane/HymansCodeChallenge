@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FlightBooking.Core
+namespace FlightBooking.Core.Classes
 {
     public class ProfitCalculator : IProfitCalculator
     {

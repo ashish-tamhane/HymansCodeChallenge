@@ -1,6 +1,6 @@
 ﻿using FlightBooking.Core.Interfaces;
 
-namespace FlightBooking.Core
+namespace FlightBooking.Core.Classes
 {
     public class Passenger : IPassenger
     {

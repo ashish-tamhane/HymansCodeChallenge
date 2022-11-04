@@ -1,6 +1,5 @@
-﻿using System;
-using FlightBooking.Core;
-using FlightBooking.Core.Interfaces;
+﻿using FlightBooking.Core.Classes;
+using System;
 
 namespace FlightBookingProblem
 {

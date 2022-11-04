@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FlightBooking.Core.Classes;
+using System.Collections.Generic;
 
 namespace FlightBooking.Core.Interfaces
 {

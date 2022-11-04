@@ -1,4 +1,5 @@
-﻿using FlightBooking.Core.Interfaces;
+﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
