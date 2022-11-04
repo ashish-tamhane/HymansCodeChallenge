@@ -10,15 +10,17 @@ namespace FlightBooking.Core
         private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
         private readonly string NEW_LINE = Environment.NewLine;
         private readonly ILoyaltyPointsCalculator loyaltyCalculator;
+        private readonly IProfitCalculator profitCalculator;
         private const string INDENTATION = "    ";
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public ScheduledFlight(IFlightRoute flightRoute, ILoyaltyPointsCalculator loyaltyCalculator)
+        public ScheduledFlight(IFlightRoute flightRoute, ILoyaltyPointsCalculator loyaltyCalculator, IProfitCalculator profitCalculator)
         {
             FlightRoute = flightRoute;
             this.loyaltyCalculator = loyaltyCalculator;
+            this.profitCalculator = profitCalculator;
             Passengers = new List<IPassenger>();
         }
 
@@ -49,10 +51,7 @@ namespace FlightBooking.Core
 
         public double GetExpectedProfitFromFlight()
         {
-            return Passengers.Sum(p =>
-                        p.Type == PassengerType.AirlineEmployee ? 0
-                                                    : (p.Type == PassengerType.General ? FlightRoute.BasePrice
-                                                                : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));
+            return profitCalculator.CalculateProfit(Passengers, FlightRoute.BasePrice);
         }
 
 
