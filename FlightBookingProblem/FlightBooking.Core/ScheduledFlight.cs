@@ -8,9 +8,7 @@ namespace FlightBooking.Core
     public class ScheduledFlight : IScheduledFlight
     {
         private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
-        private readonly string NEW_LINE = Environment.NewLine;
-        private int totalLoyaltyPointsAccrued;
-        private int totalLoyaltyPointsRedeemed;
+        private readonly string NEW_LINE = Environment.NewLine;        
         private const string INDENTATION = "    ";
 
         public int TotalLoyaltyPointsAccrued { get; set; }
@@ -31,7 +29,7 @@ namespace FlightBooking.Core
             int totalLoyaltyPointsAccrued;
             int totalLoyaltyPointsRedeemed;
             
-            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out totalLoyaltyPointsAccrued, out totalLoyaltyPointsRedeemed))
+            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out totalLoyaltyPointsRedeemed, out totalLoyaltyPointsAccrued))
             {
                 TotalLoyaltyPointsRedeemed += totalLoyaltyPointsRedeemed;
                 TotalLoyaltyPointsAccrued += totalLoyaltyPointsAccrued;
