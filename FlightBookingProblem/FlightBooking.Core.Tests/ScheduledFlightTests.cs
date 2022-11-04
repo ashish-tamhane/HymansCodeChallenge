@@ -35,5 +35,15 @@ namespace FlightBooking.Core.Tests
             Assert.AreEqual(expectedBaggageFromFlight, output);
 
         }
+
+        [TestMethod]
+        public void TestProfitFromFlight()
+        {
+            double output = _scheduledFlight.GetExpectedProfitFromFlight();
+            double expectedBaggageFromFlight = 300;
+
+            Assert.AreEqual(expectedBaggageFromFlight, output);
+
+        }
     }
 }

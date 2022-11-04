@@ -34,12 +34,20 @@ namespace FlightBooking.Core
         public int GetExpectedBaggageFromFlight()
         {
             return Passengers.Sum(p => { return p.Type == PassengerType.LoyaltyMember ? 2 : 1; });
-        }        
+        }
+
+        public double GetExpectedProfitFromFlight()
+        {
+            return Passengers.Sum(p =>
+                        p.Type == PassengerType.AirlineEmployee ? 0
+                                                    : (p.Type == PassengerType.General ? FlightRoute.BasePrice
+                                                                : (p.IsUsingLoyaltyPoints ? 0 : FlightRoute.BasePrice)));            
+        }
 
         public string GetSummary()
         {
             double costOfFlight = 0;
-            double profitFromFlight = 0;
+            double profitFromFlight = GetExpectedProfitFromFlight();
             int totalLoyaltyPointsAccrued = 0;
             int totalLoyaltyPointsRedeemed = 0;            
             int seatsTaken = 0;
@@ -51,8 +59,7 @@ namespace FlightBooking.Core
                 switch (passenger.Type)
                 {
                     case (PassengerType.General):
-                        {
-                            profitFromFlight += FlightRoute.BasePrice;                            
+                        {                            
                             break;
                         }
                     case (PassengerType.LoyaltyMember):
@@ -65,8 +72,7 @@ namespace FlightBooking.Core
                             }
                             else
                             {
-                                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;
-                                profitFromFlight += FlightRoute.BasePrice;
+                                totalLoyaltyPointsAccrued += FlightRoute.LoyaltyPointsGained;                                
                             }                            
                             break;
                         }
@@ -119,5 +125,7 @@ namespace FlightBooking.Core
 
             return result;
         }
+
+        
     }
 }
