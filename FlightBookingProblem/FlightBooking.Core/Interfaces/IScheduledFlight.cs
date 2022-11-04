@@ -8,7 +8,7 @@ namespace FlightBooking.Core.Interfaces
         IFlightRoute FlightRoute { get; }
         List<IPassenger> Passengers { get; }
 
-        void AddPassenger(IPassenger passenger, ILoyaltyPointsCalculator loyaltyPointsCalculator);
+        void AddPassenger(IPassenger passenger);
         string GetSummary();
         void SetAircraftForRoute(Plane aircraft);
     }

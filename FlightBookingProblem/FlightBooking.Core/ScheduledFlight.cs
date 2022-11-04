@@ -8,15 +8,17 @@ namespace FlightBooking.Core
     public class ScheduledFlight : IScheduledFlight
     {
         private readonly string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
-        private readonly string NEW_LINE = Environment.NewLine;        
+        private readonly string NEW_LINE = Environment.NewLine;
+        private readonly ILoyaltyPointsCalculator loyaltyCalculator;
         private const string INDENTATION = "    ";
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public ScheduledFlight(IFlightRoute flightRoute)
+        public ScheduledFlight(IFlightRoute flightRoute, ILoyaltyPointsCalculator loyaltyCalculator)
         {
             FlightRoute = flightRoute;
+            this.loyaltyCalculator = loyaltyCalculator;
             Passengers = new List<IPassenger>();
         }
 
@@ -24,12 +26,9 @@ namespace FlightBooking.Core
         public IPlane Aircraft { get; private set; }
         public List<IPassenger> Passengers { get; private set; }
 
-        public void AddPassenger(IPassenger passenger, ILoyaltyPointsCalculator loyaltyCalculator)
+        public void AddPassenger(IPassenger passenger)
         {
-            int totalLoyaltyPointsAccrued;
-            int totalLoyaltyPointsRedeemed;
-            
-            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out totalLoyaltyPointsRedeemed, out totalLoyaltyPointsAccrued))
+            if (loyaltyCalculator.CalculateLoyaltyPoints(passenger, FlightRoute, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued))
             {
                 TotalLoyaltyPointsRedeemed += totalLoyaltyPointsRedeemed;
                 TotalLoyaltyPointsAccrued += totalLoyaltyPointsAccrued;
@@ -72,6 +71,7 @@ namespace FlightBooking.Core
             double costOfFlight = GetFlightCost();
             double profitFromFlight = GetExpectedProfitFromFlight();
             int seatsTaken = GetSeatsTaken();
+            double profitSurplus = profitFromFlight - costOfFlight;
 
             string result = "Flight summary for " + FlightRoute.Title;
 
@@ -94,9 +94,7 @@ namespace FlightBooking.Core
             result += NEW_LINE;
             result += "Total costs from flight: " + costOfFlight;
             result += NEW_LINE;
-
-            double profitSurplus = profitFromFlight - costOfFlight;
-
+            
             result += (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;
 
             result += VERTICAL_WHITE_SPACE;

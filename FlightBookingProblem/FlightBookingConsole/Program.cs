@@ -30,7 +30,7 @@ namespace FlightBookingProblem
                         Type = PassengerType.General, 
                         Name = passengerSegments[2], 
                         Age = Convert.ToInt32(passengerSegments[3])
-                    }, new LoyaltyCalculator());
+                    });
                 }
                 else if (enteredText.Contains("add loyalty"))
                 {
@@ -42,7 +42,7 @@ namespace FlightBookingProblem
                         Age = Convert.ToInt32(passengerSegments[3]),
                         LoyaltyPoints = Convert.ToInt32(passengerSegments[4]),
                         IsUsingLoyaltyPoints = Convert.ToBoolean(passengerSegments[5]),
-                    }, new LoyaltyCalculator());
+                    });
                 }
                 else if (enteredText.Contains("add airline"))
                 {
@@ -52,7 +52,7 @@ namespace FlightBookingProblem
                         Type = PassengerType.AirlineEmployee, 
                         Name = passengerSegments[2], 
                         Age = Convert.ToInt32(passengerSegments[3]),
-                    }, new LoyaltyCalculator());
+                    });
                 }
                 else if (enteredText.Contains("exit"))
                 {
@@ -77,7 +77,7 @@ namespace FlightBookingProblem
                 MinimumTakeOffPercentage = 0.7
             };
 
-            _scheduledFlight = new ScheduledFlight(londonToParis);
+            _scheduledFlight = new ScheduledFlight(londonToParis, new LoyaltyCalculator());
 
             _scheduledFlight.SetAircraftForRoute(
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });

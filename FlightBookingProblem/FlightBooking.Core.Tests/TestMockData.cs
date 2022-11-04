@@ -38,7 +38,7 @@ THIS FLIGHT MAY PROCEED";
                 MinimumTakeOffPercentage = 0.7
             };
 
-            _scheduledFlight = new ScheduledFlight(londonToParis);
+            _scheduledFlight = new ScheduledFlight(londonToParis, new LoyaltyCalculator());
 
             _scheduledFlight.SetAircraftForRoute(
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
@@ -47,28 +47,28 @@ THIS FLIGHT MAY PROCEED";
                 Type = PassengerType.General,
                 Name = "Steve",
                 Age = 30
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
                 Name = "Mark",
                 Age = 12
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
                 Name = "James",
                 Age = 36
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
                 Name = "Jane",
                 Age = 32
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
@@ -77,7 +77,7 @@ THIS FLIGHT MAY PROCEED";
                 Age = 29,
                 LoyaltyPoints = 1000,
                 IsUsingLoyaltyPoints = true,
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
@@ -86,7 +86,7 @@ THIS FLIGHT MAY PROCEED";
                 Age = 45,
                 LoyaltyPoints = 1250,
                 IsUsingLoyaltyPoints = false,
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
@@ -95,28 +95,28 @@ THIS FLIGHT MAY PROCEED";
                 Age = 60,
                 LoyaltyPoints = 50,
                 IsUsingLoyaltyPoints = false,
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.AirlineEmployee,
                 Name = "Trevor",
                 Age = 47,
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
                 Name = "Alan",
                 Age = 34
-            }, new LoyaltyCalculator());
+            });
 
             _scheduledFlight.AddPassenger(new Passenger
             {
                 Type = PassengerType.General,
                 Name = "Suzy",
                 Age = 21
-            }, new LoyaltyCalculator());
+            });
         }
     }
 }
