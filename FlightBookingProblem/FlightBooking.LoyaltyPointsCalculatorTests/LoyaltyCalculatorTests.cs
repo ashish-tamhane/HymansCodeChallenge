@@ -23,7 +23,7 @@ namespace FlightBooking.Core.Tests
                 MinimumTakeOffPercentage = 0.7
             };
 
-            var passengers = TestMockData.GetPassengers();
+            var passengers = TestMockData.GetPassengersWithDiscountedPassenger();
 
             foreach (Passenger passenger in passengers)
             {
