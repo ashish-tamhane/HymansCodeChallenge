@@ -20,19 +20,22 @@ namespace FlightBookingProblem
                 if (enteredText.Contains("print summary"))
                 {
                     Console.WriteLine();
+                    
                     FlightInformation flightInformation = _scheduledFlight.GetFlightInformation();
                     FlightFinance flightFinance = new FlightFinance(_scheduledFlight, _scheduledFlight.FlightRoute, new ProfitCalculator());
 
                     flightInformation.costOfFlight = flightFinance.CostOfFlight();
                     flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
-                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();
+                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();                    
+                    flightInformation.totalLoyaltyPointsAccrued = flightManager.TotalLoyaltyPointsAccrued;
+                    flightInformation.totalLoyaltyPointsRedeemed = flightManager.TotalLoyaltyPointsRedeemed;
 
                     Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, flightInformation));
                 }
                 else if (enteredText.Contains("add general"))
                 {
                     string[] passengerSegments = enteredText.Split(' ');
-                    _scheduledFlight.AddPassenger(new Passenger
+                    flightManager.AddPassenger(new Passenger
                     {
                         Type = PassengerType.General, 
                         Name = passengerSegments[2], 
@@ -42,7 +45,7 @@ namespace FlightBookingProblem
                 else if (enteredText.Contains("add loyalty"))
                 {
                     string[] passengerSegments = enteredText.Split(' ');
-                    _scheduledFlight.AddPassenger(new Passenger
+                    flightManager.AddPassenger(new Passenger
                     {
                         Type = PassengerType.LoyaltyMember, 
                         Name = passengerSegments[2], 
@@ -54,7 +57,7 @@ namespace FlightBookingProblem
                 else if (enteredText.Contains("add airline"))
                 {
                     string[] passengerSegments = enteredText.Split(' ');
-                    _scheduledFlight.AddPassenger(new Passenger
+                    flightManager.AddPassenger(new Passenger
                     {
                         Type = PassengerType.AirlineEmployee, 
                         Name = passengerSegments[2], 
@@ -88,7 +91,7 @@ namespace FlightBookingProblem
                 new BaggageCalculator(),
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
 
-            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator());           
+            flightManager = new FlightManager(_scheduledFlight, _scheduledFlight.FlightRoute, new LoyaltyPointsCalculator());           
         }
     }
 }

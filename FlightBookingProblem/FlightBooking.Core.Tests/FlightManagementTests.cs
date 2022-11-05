@@ -18,9 +18,10 @@ namespace FlightBooking.Core.Tests
         }
 
         [TestMethod]
-        public void FlightManagerTest()
-        {            
-            IFlightManager flightManager = new FlightManager(_scheduledFlight, _scheduledFlight.FlightRoute, new LoyaltyPointsCalculator());
+        public void TestLoyaltyPointsFromFlight()
+        {                        
+            Assert.AreEqual(10, _flightManager.TotalLoyaltyPointsAccrued);
+            Assert.AreEqual(100, _flightManager.TotalLoyaltyPointsRedeemed);
         }
     }
 }
