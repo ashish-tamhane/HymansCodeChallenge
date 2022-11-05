@@ -40,16 +40,11 @@ namespace FlightBooking.Core.Classes
             scheduledFlight.AddPassenger(passenger);
         }
 
-        public void AddPassengers(IEnumerable<Passenger> passengers)
-        {
-            passengers.ToList().ForEach(p => AddPassenger(p));
-        }
+        public void AddPassengers(IEnumerable<Passenger> passengers) => passengers.ToList().ForEach(p => AddPassenger(p));
 
-        public bool FlightProceedCheck()
-        {            
-            return flightFinance.ProfitSurplus() > 0 &&
+        public bool FlightProceedCheck() 
+            => flightFinance.ProfitSurplus() > 0 &&
                             scheduledFlight.SeatsOccupied < scheduledFlight.TotalSeats &&
                             scheduledFlight.SeatsOccupied / scheduledFlight.TotalSeats > flightRoute.MinimumTakeOffPercentage;
-        }
     }
 }

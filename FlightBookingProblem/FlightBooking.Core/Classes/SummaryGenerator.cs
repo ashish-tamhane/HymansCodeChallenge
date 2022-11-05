@@ -3,6 +3,7 @@ using FlightBooking.Core.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FlightBooking.Core.Classes
 {
@@ -14,53 +15,32 @@ namespace FlightBooking.Core.Classes
             FlightInformation summaryDetails,
             FlightManager flightManager
             )
-        {
-            string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
-            string NEW_LINE = Environment.NewLine;
-
-            string result = GetResult(summaryDetails.flightRouteTitle);
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += GetSeatsTaken(summaryDetails.seatsTaken);
-            result += NEW_LINE;
-            result += GetGeneralSales(passengers);
-            result += NEW_LINE;
-            result += GetLoyaltyMemberSales(passengers);
-            result += NEW_LINE;
-            result += GetAirlineEmployees(passengers);
-
-            result += VERTICAL_WHITE_SPACE;
-            result += GetTotalExpectedBaggage(summaryDetails.expectedBaggageFromFlight);
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += GetTotalRevenueFromFlight(summaryDetails.profitFromFlight);
-            result += NEW_LINE;
-            result += GetTotalCostFromFlight(summaryDetails.costOfFlight);
-            result += NEW_LINE;
-
-            result += DisplayProfitOrLoss(summaryDetails.profitSurplus);
-
-            result += VERTICAL_WHITE_SPACE;
-
-            result += GetLoyaltyPointsGivenAway(summaryDetails.totalLoyaltyPointsAccrued) + NEW_LINE;
-            result += GetTotalLoyaltyPointsRedeemed(summaryDetails.totalLoyaltyPointsRedeemed) + NEW_LINE;
-
-            result += VERTICAL_WHITE_SPACE;
+        {            
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(GetResult(summaryDetails.flightRouteTitle));
+            sb.AppendLine();
+            sb.AppendLine(GetSeatsTaken(summaryDetails.seatsTaken));            
+            sb.AppendLine(GetGeneralSales(passengers));            
+            sb.AppendLine(GetLoyaltyMemberSales(passengers));            
+            sb.AppendLine(GetAirlineEmployees(passengers));            
+            sb.AppendLine();
+            sb.AppendLine(GetTotalExpectedBaggage(summaryDetails.expectedBaggageFromFlight));            
+            sb.AppendLine();            
+            sb.AppendLine(GetTotalRevenueFromFlight(summaryDetails.profitFromFlight));            
+            sb.AppendLine(GetTotalCostFromFlight(summaryDetails.costOfFlight));                      
+            sb.AppendLine(DisplayProfitOrLoss(summaryDetails.profitSurplus));            
+            sb.AppendLine();            
+            sb.AppendLine(GetLoyaltyPointsGivenAway(summaryDetails.totalLoyaltyPointsAccrued));
+            sb.AppendLine(GetTotalLoyaltyPointsRedeemed(summaryDetails.totalLoyaltyPointsRedeemed));            
+            sb.AppendLine();            
+            sb.AppendLine();
 
             if (flightManager.FlightProceedCheck())
-                result += "THIS FLIGHT MAY PROCEED";
+                sb.Append("THIS FLIGHT MAY PROCEED");
             else
-                result += "FLIGHT MAY NOT PROCEED";
-
-            //if ( FlightProceedCheck(summaryDetails.seatsTaken, summaryDetails.profitSurplus, summaryDetails.aircraftNumberOfSeats, 
-            //    summaryDetails.flightRouteMinimumTakeOffPercentage))
-            //    result += "THIS FLIGHT MAY PROCEED";
-            //else
-            //    result += "FLIGHT MAY NOT PROCEED";
-
-            return result;
+                sb.Append("FLIGHT MAY NOT PROCEED");
+            
+            return sb.ToString();
         }
         private static string GetTotalExpectedBaggage(int expectedBaggageFromFlight)
         {
@@ -109,12 +89,6 @@ namespace FlightBooking.Core.Classes
             return (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;
         }
 
-        private static bool FlightProceedCheck(int seatsTaken, double profitSurplus, double numberOfSeats, double minimumTakeOffPercentage)
-        {
-            return profitSurplus > 0 &&
-                            seatsTaken < numberOfSeats &&
-                            seatsTaken / numberOfSeats > minimumTakeOffPercentage;
-        }
 
         private static string GetResult(string flightRouteTitle)
         {
