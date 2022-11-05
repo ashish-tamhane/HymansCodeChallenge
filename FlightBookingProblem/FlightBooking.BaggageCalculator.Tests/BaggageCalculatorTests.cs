@@ -1,10 +1,8 @@
-﻿using FlightBooking.Core.Classes;
+﻿using FlightBooking.BaggageCalculator.Classes;
+using FlightBooking.BaggageCalculator.Interfaces;
 using FlightBooking.Entities.Models;
-using FlightBooking.Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using FlightBooking.BaggageCalculator.Interfaces;
-using FlightBooking.BaggageCalculator.Classes;
 
 namespace FlightBooking.Core.Tests
 {

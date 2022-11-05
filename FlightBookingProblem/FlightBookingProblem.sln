@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.ProfitCalcula
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.LoyaltyPointsCalculator", "FlightBooking.LoyaltyPointsCalculator\FlightBooking.LoyaltyPointsCalculator.csproj", "{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.BaggageCalculator.Tests", "FlightBooking.BaggageCalculator.Tests\FlightBooking.BaggageCalculator.Tests.csproj", "{04AB946E-8288-4A01-91C6-8922651416A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04AB946E-8288-4A01-91C6-8922651416A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AB946E-8288-4A01-91C6-8922651416A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AB946E-8288-4A01-91C6-8922651416A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AB946E-8288-4A01-91C6-8922651416A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{341A703B-A029-4D3A-82A3-C33AC7FF0F50} = {6F98F2E4-8511-4D31-BA5C-57EC08E9324E}
 		{167AB064-6ECE-4424-9719-7826C092C2B0} = {6F98F2E4-8511-4D31-BA5C-57EC08E9324E}
 		{9E535A6C-530D-4FF8-8F39-4345E13FF7B6} = {6F98F2E4-8511-4D31-BA5C-57EC08E9324E}
+		{04AB946E-8288-4A01-91C6-8922651416A0} = {8A24694A-BC10-4B7A-BD25-7A533C3083FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {657D5E1C-58C5-4E76-A266-0AF8C1CFAA9A}
