@@ -17,6 +17,7 @@ namespace FlightBooking.Core.Tests
 Total passengers: 10
     General sales: 6
     Loyalty member sales: 3
+    Discounted member sales: 0
     Airline employee comps: 1
 
 Total expected baggage: 13

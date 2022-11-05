@@ -22,7 +22,8 @@ namespace FlightBooking.Core.Classes
             sb.AppendLine();
             sb.AppendLine(GetSeatsTaken(summaryDetails.seatsTaken));            
             sb.AppendLine(GetGeneralSales(passengers));            
-            sb.AppendLine(GetLoyaltyMemberSales(passengers));            
+            sb.AppendLine(GetLoyaltyMemberSales(passengers));
+            sb.AppendLine(GetDiscountedSales(passengers));
             sb.AppendLine(GetAirlineEmployees(passengers));            
             sb.AppendLine();
             sb.AppendLine(GetTotalExpectedBaggage(summaryDetails.expectedBaggageFromFlight));            
@@ -82,7 +83,12 @@ namespace FlightBooking.Core.Classes
         {
             return INDENTATION + "General sales: " + passengers.Count(p => p.Type == PassengerType.General);
         }
-       
+
+        private static string GetDiscountedSales(IEnumerable<Passenger> passengers)
+        {
+            return INDENTATION + "Discounted member sales: " + passengers.Count(p => p.Type == PassengerType.Discounted);
+        }
+
         private static string DisplayProfitOrLoss(double profitSurplus)
         {
             return (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;

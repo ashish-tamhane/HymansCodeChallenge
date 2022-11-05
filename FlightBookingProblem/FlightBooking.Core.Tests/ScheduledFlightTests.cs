@@ -36,7 +36,7 @@ namespace FlightBooking.Core.Tests
 
             string output = SummaryGenerator.GenerateSummary(scheduledFlight.Passengers, flightInformation, flightManager);
 
-            Assert.AreEqual(TestMockData.ExpectedConsoleOutput, output);
+            Assert.AreEqual(TestMockData.ExpectedConsoleOutput.Trim(), output.Trim()) ;
         }
 
         [TestMethod]
