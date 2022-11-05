@@ -1,5 +1,6 @@
 ﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Entities;
+using FlightBooking.Entities.Models;
+using FlightBooking.Entities.Enumerations;
 
 namespace FlightBooking.Core.Interfaces
 {

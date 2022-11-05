@@ -50,6 +50,10 @@
       <Project>{22f6b34b-9154-4944-b1fd-d5564e250ae9}</Project>
       <Name>FlightBooking.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.Entities\FlightBooking.Entities.csproj">
+      <Project>{1E006604-66ED-4114-80B0-DD0413A80180}</Project>
+      <Name>FlightBooking.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

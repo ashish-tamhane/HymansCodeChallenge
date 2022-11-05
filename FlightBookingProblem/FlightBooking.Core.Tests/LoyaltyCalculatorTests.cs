@@ -1,6 +1,6 @@
 ﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces;
+using FlightBooking.Entities.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlightBooking.Core.Tests

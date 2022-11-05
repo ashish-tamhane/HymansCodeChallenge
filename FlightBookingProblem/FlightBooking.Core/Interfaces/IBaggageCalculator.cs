@@ -1,5 +1,4 @@
-﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Entities;
+﻿using FlightBooking.Entities.Models;
 using System.Collections.Generic;
 
 namespace FlightBooking.Core.Interfaces

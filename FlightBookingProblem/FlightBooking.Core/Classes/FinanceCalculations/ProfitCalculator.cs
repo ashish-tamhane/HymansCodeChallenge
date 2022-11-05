@@ -1,9 +1,9 @@
-﻿using FlightBooking.Core.Interfaces;
-using System.Collections.Generic;
-using FlightBooking.Core.Entities;
-using FlightBooking.Core.Enumerations;
+﻿using System.Collections.Generic;
+
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Linq;
+using FlightBooking.Entities.Models;
+using FlightBooking.Entities.Enumerations;
 
 namespace FlightBooking.Core.Classes.FinanceCalculations
 {

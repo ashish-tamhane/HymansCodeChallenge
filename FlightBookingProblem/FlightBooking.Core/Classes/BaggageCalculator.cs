@@ -1,8 +1,10 @@
-﻿using FlightBooking.Core.Entities;
+﻿
 using FlightBooking.Core.Interfaces;
+using FlightBooking.Entities.Models;
+using FlightBooking.Entities.Enumerations;
 using System.Collections.Generic;
 using System.Linq;
-using FlightBooking.Core.Enumerations;
+
 
 namespace FlightBooking.Core.Classes
 {

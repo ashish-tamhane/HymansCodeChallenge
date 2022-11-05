@@ -1,5 +1,4 @@
-﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Entities;
+﻿using FlightBooking.Entities.Models;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Collections.Generic;
 

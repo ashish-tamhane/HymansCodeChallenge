@@ -1,5 +1,5 @@
-﻿using FlightBooking.Core.Entities;
-using FlightBooking.Core.Enumerations;
+﻿using FlightBooking.Entities.Models;
+using FlightBooking.Entities.Enumerations;
 using FlightBooking.Core.Interfaces;
 using System;
 

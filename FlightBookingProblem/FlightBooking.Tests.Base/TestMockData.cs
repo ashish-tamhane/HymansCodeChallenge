@@ -1,8 +1,8 @@
 ﻿using FlightBooking.Core.Classes;
 using FlightBooking.Core.Classes.FinanceCalculations;
-using FlightBooking.Core.Entities;
-using FlightBooking.Core.Enumerations;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
+using FlightBooking.Entities.Models;
+using FlightBooking.Entities.Enumerations;
 using FlightBooking.Manager.Classes;
 using System.Collections.Generic;
 

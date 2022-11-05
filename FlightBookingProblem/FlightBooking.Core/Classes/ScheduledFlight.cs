@@ -1,4 +1,4 @@
-﻿using FlightBooking.Core.Entities;
+﻿using FlightBooking.Entities.Models;
 using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;

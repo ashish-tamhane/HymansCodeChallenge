@@ -1,7 +1,7 @@
 ﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
+using FlightBooking.Entities.Models;
 using FlightBooking.Manager.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
