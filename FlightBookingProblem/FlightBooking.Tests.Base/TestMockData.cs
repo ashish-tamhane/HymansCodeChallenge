@@ -67,6 +67,40 @@ THIS FLIGHT MAY PROCEED";
             return passengers;
         }
 
+        public static List<Passenger> GetEachPassengerWithDiscountedPassenger()
+        {
+            var passengers = GetEachPassenger();
+
+            passengers.Add(new Passenger()
+            {
+                Age = 20,
+                AllowedBags = 10,
+                IsUsingLoyaltyPoints = true,
+                LoyaltyPoints = 50,
+                Type = PassengerType.Discounted,
+                Name = "DiscountedPassenger"
+            });
+
+            return passengers;
+        }
+
+        public static List<Passenger> GetPassengersWithDiscountedPassenger()
+        {
+            var passengers = GetPassengers();
+
+            passengers.Add(new Passenger()
+            {
+                Age = 20,
+                AllowedBags = 10,
+                IsUsingLoyaltyPoints = true,
+                LoyaltyPoints = 50,
+                Type = PassengerType.Discounted,
+                Name = "DiscountedPassenger"
+            });
+
+            return passengers;
+        }
+
         public static List<Passenger> GetPassengers()
         {
             var passengersArray = new[] { new Passenger

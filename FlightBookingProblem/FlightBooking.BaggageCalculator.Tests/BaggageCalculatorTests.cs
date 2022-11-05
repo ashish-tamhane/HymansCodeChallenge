@@ -21,6 +21,28 @@ namespace FlightBooking.Core.Tests
         }
 
         [TestMethod]
+        public void TestChallengeBaggageWithDiscountedPassenger()
+        {
+            IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();
+
+            int baggageCount = baggageCalculator.CalculateBaggage(TestMockData.GetPassengersWithDiscountedPassenger());
+
+            Assert.AreEqual(13, baggageCount);
+
+        }
+
+        [TestMethod]
+        public void TestDiscountedPassengerBaggage()
+        {
+            IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();
+
+            int baggageCount = baggageCalculator.CalculateBaggage(TestMockData.GetEachPassengerWithDiscountedPassenger());
+
+            Assert.AreEqual(6, baggageCount);
+
+        }
+
+        [TestMethod]
         public void TestEachPersonBaggage()
         {
             IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();

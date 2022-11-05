@@ -82,9 +82,7 @@ namespace FlightBooking.Core.Classes
         {
             return INDENTATION + "General sales: " + passengers.Count(p => p.Type == PassengerType.General);
         }
-
        
-
         private static string DisplayProfitOrLoss(double profitSurplus)
         {
             return (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;

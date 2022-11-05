@@ -11,7 +11,11 @@ namespace FlightBooking.BaggageCalculator.Classes
     {
         public int CalculateBaggage(List<Passenger> passengers)
         {
-            return passengers.Sum(p => { return p.Type == PassengerType.LoyaltyMember ? 2 : 1; });
+            return passengers.Sum(p => 
+                {
+                    return p.Type == PassengerType.Discounted ? 0 : 
+                        p.Type == PassengerType.LoyaltyMember ? 2 : 1;
+                });
         }
     }
 }
