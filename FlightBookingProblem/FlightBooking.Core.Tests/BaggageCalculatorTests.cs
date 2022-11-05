@@ -3,6 +3,8 @@ using FlightBooking.Entities.Models;
 using FlightBooking.Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using FlightBooking.BaggageCalculator.Interfaces;
+using FlightBooking.BaggageCalculator.Classes;
 
 namespace FlightBooking.Core.Tests
 {
@@ -12,7 +14,7 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestChallengeBaggage()
         {
-            IBaggageCalculator baggageCalculator = new BaggageCalculator();
+            IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();
 
             int baggageCount = baggageCalculator.CalculateBaggage(TestMockData.GetPassengers());
 
@@ -23,7 +25,7 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestEachPersonBaggage()
         {
-            IBaggageCalculator baggageCalculator = new BaggageCalculator();
+            IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();
 
             int baggageCount = baggageCalculator.CalculateBaggage(TestMockData.GetEachPassenger());
 
@@ -34,7 +36,7 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestEmptyBaggage()
         {
-            IBaggageCalculator baggageCalculator = new BaggageCalculator();
+            IBaggageCalculator baggageCalculator = new FlightBaggageCalculator();
 
             int baggageCount = baggageCalculator.CalculateBaggage(new List<Passenger>());
 

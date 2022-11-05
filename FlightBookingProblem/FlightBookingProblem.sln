@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlightBookingView", "Flight
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.Entities", "FlightBooking.Entities\FlightBooking.Entities.csproj", "{1E006604-66ED-4114-80B0-DD0413A80180}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.BaggageCalculator", "FlightBooking.BaggageCalculator\FlightBooking.BaggageCalculator.csproj", "{341A703B-A029-4D3A-82A3-C33AC7FF0F50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{1E006604-66ED-4114-80B0-DD0413A80180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E006604-66ED-4114-80B0-DD0413A80180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E006604-66ED-4114-80B0-DD0413A80180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341A703B-A029-4D3A-82A3-C33AC7FF0F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341A703B-A029-4D3A-82A3-C33AC7FF0F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341A703B-A029-4D3A-82A3-C33AC7FF0F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341A703B-A029-4D3A-82A3-C33AC7FF0F50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{4470497F-BACA-46D5-A469-59EC5065A324} = {8A24694A-BC10-4B7A-BD25-7A533C3083FB}
 		{339919DA-8E38-4E84-9A79-42318E53DFA8} = {8A24694A-BC10-4B7A-BD25-7A533C3083FB}
 		{1E006604-66ED-4114-80B0-DD0413A80180} = {6F98F2E4-8511-4D31-BA5C-57EC08E9324E}
+		{341A703B-A029-4D3A-82A3-C33AC7FF0F50} = {6F98F2E4-8511-4D31-BA5C-57EC08E9324E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {657D5E1C-58C5-4E76-A266-0AF8C1CFAA9A}

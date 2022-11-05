@@ -5,6 +5,7 @@ using FlightBooking.Entities.Models;
 using FlightBooking.Entities.Enumerations;
 using FlightBooking.Manager.Classes;
 using System.Collections.Generic;
+using FlightBooking.BaggageCalculator.Classes;
 
 namespace FlightBooking.Core.Tests
 {
@@ -148,7 +149,7 @@ THIS FLIGHT MAY PROCEED";
             };
 
             _scheduledFlight = new ScheduledFlight(londonToParis,
-                new BaggageCalculator(),
+                new FlightBaggageCalculator(),
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
 
             IFlightFinance flightFinance = new FlightFinance(_scheduledFlight, londonToParis, new ProfitCalculator());

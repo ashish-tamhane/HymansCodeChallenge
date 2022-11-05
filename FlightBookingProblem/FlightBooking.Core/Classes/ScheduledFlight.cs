@@ -2,6 +2,7 @@
 using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using FlightBooking.BaggageCalculator.Interfaces;
 
 namespace FlightBooking.Core.Classes
 {
