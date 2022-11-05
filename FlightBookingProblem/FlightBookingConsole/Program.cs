@@ -19,7 +19,7 @@ namespace FlightBookingProblem
                 if (enteredText.Contains("print summary"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine(_scheduledFlight.GetSummary());
+                    Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, _scheduledFlight.GetFlightInformation()));
                 }
                 else if (enteredText.Contains("add general"))
                 {

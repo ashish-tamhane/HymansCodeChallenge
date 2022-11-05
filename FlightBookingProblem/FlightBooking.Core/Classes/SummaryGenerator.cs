@@ -11,7 +11,7 @@ namespace FlightBooking.Core.Classes
         private static string INDENTATION = "    ";
 
         public static string GenerateSummary(IEnumerable<IPassenger> passengers,
-            SummaryDetails summaryDetails
+            FlightInformation summaryDetails
             )
         {
             string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;

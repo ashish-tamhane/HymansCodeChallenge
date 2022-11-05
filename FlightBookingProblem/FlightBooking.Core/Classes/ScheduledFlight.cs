@@ -23,6 +23,12 @@ namespace FlightBooking.Core.Classes
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
+        public IFlightRoute FlightRoute => FlightRoute;
+
+        public List<IPassenger> Passengers => passengers;
+
+        
+
         public ScheduledFlight(IFlightRoute flightRoute,
             ILoyaltyPointsCalculator loyaltyCalculator,
             IProfitCalculator profitCalculator,
@@ -80,8 +86,8 @@ namespace FlightBooking.Core.Classes
         {
             return profitFromFlight - costOfFlight;
         }
-
-        public string GetSummary()
+       
+        public FlightInformation GetFlightInformation()
         {
             double costOfFlight = GetFlightCost();
             double profitFromFlight = GetExpectedProfitFromFlight();
@@ -92,7 +98,7 @@ namespace FlightBooking.Core.Classes
             int aircraftNumberOfSeats = Aircraft.NumberOfSeats;
             double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
 
-            SummaryDetails summaryDetails = new SummaryDetails()
+            return new FlightInformation()
             {
                 costOfFlight = costOfFlight,
                 profitFromFlight = profitFromFlight,
@@ -105,8 +111,6 @@ namespace FlightBooking.Core.Classes
                 totalLoyaltyPointsAccrued = TotalLoyaltyPointsAccrued,
                 totalLoyaltyPointsRedeemed = TotalLoyaltyPointsRedeemed
             };
-
-            return SummaryGenerator.GenerateSummary(passengers, summaryDetails);
         }
     }
 }

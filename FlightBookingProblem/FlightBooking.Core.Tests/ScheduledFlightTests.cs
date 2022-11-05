@@ -21,10 +21,8 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestGetSummary()
         {
-            string output = _scheduledFlight.GetSummary();
-
+            string output = SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, _scheduledFlight.GetFlightInformation());            
             Assert.AreEqual(TestMockData.ExpectedConsoleOutput, output);
-
         }
 
         [TestMethod]
