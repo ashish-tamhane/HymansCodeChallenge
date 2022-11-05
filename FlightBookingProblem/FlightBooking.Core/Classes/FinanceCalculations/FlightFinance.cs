@@ -1,5 +1,6 @@
 ﻿using FlightBooking.Core.Interfaces;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
+using FlightBooking.Entities.Models;
 using System.Linq;
 
 namespace FlightBooking.Core.Classes.FinanceCalculations

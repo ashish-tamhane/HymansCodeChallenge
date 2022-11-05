@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\FlightInformation.cs" />
+    <Compile Include="Entities\FlightRoute.cs" />
     <Compile Include="Entities\Passenger.cs" />
     <Compile Include="Entities\Plane.cs" />
     <Compile Include="Enumerations\PassengerType.cs" />

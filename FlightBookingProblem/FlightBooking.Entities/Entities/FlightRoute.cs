@@ -1,6 +1,4 @@
-﻿using FlightBooking.Core.Interfaces;
-
-namespace FlightBooking.Core.Classes
+﻿namespace FlightBooking.Entities.Models
 {
     public class FlightRoute
     {
