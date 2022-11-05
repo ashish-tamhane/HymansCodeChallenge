@@ -1,7 +1,7 @@
 ﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 
 namespace FlightBooking.Core.Tests
@@ -36,7 +36,7 @@ namespace FlightBooking.Core.Tests
         {
             IBaggageCalculator baggageCalculator = new BaggageCalculator();
 
-            int baggageCount = baggageCalculator.CalculateBaggage(new List<IPassenger>());
+            int baggageCount = baggageCalculator.CalculateBaggage(new List<Passenger>());
 
             Assert.AreEqual(0, baggageCount);
 

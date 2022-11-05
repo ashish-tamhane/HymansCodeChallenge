@@ -1,12 +1,14 @@
 ﻿using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
+using FlightBooking.Core.Entities;
+using FlightBooking.Core.Enumerations;
 using System.Linq;
 
 namespace FlightBooking.Core.Classes
 {
     public class ProfitCalculator : IProfitCalculator
     {
-        public double CalculateProfit(IEnumerable<IPassenger> passengerCollection, double basePrice)
+        public double CalculateProfit(IEnumerable<Passenger> passengerCollection, double basePrice)
         {
             return passengerCollection.Sum(p =>
                         p.Type == PassengerType.AirlineEmployee ? 0

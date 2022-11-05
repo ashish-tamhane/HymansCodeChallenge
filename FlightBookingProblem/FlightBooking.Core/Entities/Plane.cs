@@ -1,8 +1,8 @@
 ﻿using FlightBooking.Core.Interfaces;
 
-namespace FlightBooking.Core.Classes
+namespace FlightBooking.Core.Entities
 {
-    public class Plane : IPlane
+    public struct Plane
     {
         public int Id { get; set; }
         public string Name { get; set; }

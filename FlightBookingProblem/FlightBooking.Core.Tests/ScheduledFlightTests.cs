@@ -58,7 +58,7 @@ namespace FlightBooking.Core.Tests
         {
             double seatsTaken = 0;
 
-            seatsTaken = _scheduledFlight.GetSeatsTaken();
+            seatsTaken = _scheduledFlight.SeatsOccupied;
 
             Assert.AreEqual(10, seatsTaken);
         }

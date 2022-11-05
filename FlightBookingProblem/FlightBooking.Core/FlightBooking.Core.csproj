@@ -49,14 +49,12 @@
     <Compile Include="Interfaces\IFlightManager.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
     <Compile Include="Interfaces\IFlightRoute.cs" />
-    <Compile Include="Interfaces\IPassenger.cs" />
-    <Compile Include="Interfaces\IPlane.cs" />
     <Compile Include="Interfaces\IScheduledFlight.cs" />
     <Compile Include="Interfaces\IProfitCalculator.cs" />
     <Compile Include="Classes\LoyaltyPointsCalculator.cs" />
-    <Compile Include="Classes\Passenger.cs" />
-    <Compile Include="Classes\PassengerType.cs" />
-    <Compile Include="Classes\Plane.cs" />
+    <Compile Include="Entities\Passenger.cs" />
+    <Compile Include="Enumerations\PassengerType.cs" />
+    <Compile Include="Entities\Plane.cs" />
     <Compile Include="Classes\ProfitCalculator.cs" />
     <Compile Include="Classes\ScheduledFlight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

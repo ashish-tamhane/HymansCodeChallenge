@@ -1,15 +1,19 @@
 ﻿using FlightBooking.Core.Classes;
 using System.Collections.Generic;
+using FlightBooking.Core.Entities;
 
 namespace FlightBooking.Core.Interfaces
 {
     public interface IScheduledFlight
-    {        
-        void AddPassenger(IPassenger passenger);        
-
+    {
         IFlightRoute FlightRoute { get; }
-        List<IPassenger> Passengers { get; }
+        List<Passenger> Passengers { get; }
+        int SeatsOccupied { get; }
 
+        void AddPassenger(Passenger passenger);        
+        
         FlightInformation GetFlightInformation();
+
+        
     }
 }

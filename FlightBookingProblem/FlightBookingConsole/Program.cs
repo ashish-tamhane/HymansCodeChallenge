@@ -1,4 +1,6 @@
 ﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Entities;
+using FlightBooking.Core.Enumerations;
 using System;
 
 namespace FlightBookingProblem

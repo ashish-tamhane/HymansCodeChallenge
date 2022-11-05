@@ -1,8 +1,9 @@
 ﻿using FlightBooking.Core.Interfaces;
+using FlightBooking.Core.Enumerations;
 
-namespace FlightBooking.Core.Classes
+namespace FlightBooking.Core.Entities
 {
-    public class Passenger : IPassenger
+    public struct Passenger
     {
         public string Name { get; set; }
         public int Age { get; set; }

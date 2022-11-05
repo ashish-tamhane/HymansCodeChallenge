@@ -1,7 +1,7 @@
 ﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace FlightBooking.Core.Tests
 {
@@ -25,7 +25,7 @@ namespace FlightBooking.Core.Tests
 
             var passengers = TestMockData.GetPassengers();
 
-            foreach (IPassenger passenger in passengers)
+            foreach (Passenger passenger in passengers)
             {
                 if (loyaltyPointsCalculator.CalculateLoyaltyPoints(passenger, flightRoute, out int loyaltyPointsRedeemed, out int loyaltyPointsAccrued))
                 {

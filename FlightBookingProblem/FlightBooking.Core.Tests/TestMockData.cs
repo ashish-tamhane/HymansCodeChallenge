@@ -1,10 +1,7 @@
 ﻿using FlightBooking.Core.Classes;
-using FlightBooking.Core.Interfaces;
-using System;
+using FlightBooking.Core.Entities;
+using FlightBooking.Core.Enumerations;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlightBooking.Core.Tests
 {
@@ -29,7 +26,7 @@ Total loyalty points redeemed: 100
 
 THIS FLIGHT MAY PROCEED";
 
-        public static List<IPassenger> GetEachPassenger()
+        public static List<Passenger> GetEachPassenger()
         {
             var passengersArray = new[] { new Passenger
             {
@@ -59,13 +56,13 @@ THIS FLIGHT MAY PROCEED";
                 Age = 47,
             }};
 
-            List<IPassenger> passengers = new List<IPassenger>();
+            List<Passenger> passengers = new List<Passenger>();
             passengers.AddRange(passengersArray);
 
             return passengers;
         }
 
-        public static List<IPassenger> GetPassengers()
+        public static List<Passenger> GetPassengers()
         {
             var passengersArray = new[] { new Passenger
             {
@@ -131,7 +128,7 @@ THIS FLIGHT MAY PROCEED";
                 Age = 21
             } };
 
-            List<IPassenger> passengers = new List<IPassenger>();
+            List<Passenger> passengers = new List<Passenger>();
             passengers.AddRange(passengersArray);
 
             return passengers;

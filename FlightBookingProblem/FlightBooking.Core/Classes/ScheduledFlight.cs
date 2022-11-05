@@ -1,4 +1,5 @@
-﻿using FlightBooking.Core.Interfaces;
+﻿using FlightBooking.Core.Entities;
+using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,53 +7,37 @@ namespace FlightBooking.Core.Classes
 {
     public class ScheduledFlight : IScheduledFlight
     {
-        private readonly IPlane Aircraft;
-        private readonly List<IPassenger> passengers;
+        private readonly Plane aircraft;
+        private readonly List<Passenger> passengers;
         private readonly IBaggageCalculator baggageCalculator;
         private readonly IFlightRoute flightRoute;
 
         public IFlightRoute FlightRoute => flightRoute;
 
-        public List<IPassenger> Passengers => passengers;
+        public List<Passenger> Passengers => passengers;
+        public int SeatsOccupied => Passengers.Count();
 
         public ScheduledFlight(IFlightRoute flightRoute,
             IBaggageCalculator baggageCalculator,
-            IPlane plane
-            )
+            Plane plane)
         {
             this.flightRoute = flightRoute;
             this.baggageCalculator = baggageCalculator;
-            passengers = new List<IPassenger>();
-            Aircraft = plane;
+            passengers = new List<Passenger>();
+            aircraft = plane;
         }
 
-        public void AddPassenger(IPassenger passenger)
-        {
-            passengers.Add(passenger);
-        }
-
-        public void AddPassengers(IEnumerable<IPassenger> passengers)
-        {
-            passengers.ToList().ForEach(p => AddPassenger(p));
-        }
+        public void AddPassenger(Passenger passenger) => passengers.Add(passenger);
 
 
-        public int GetExpectedBaggageFromFlight()
-        {
-            return baggageCalculator.CalculateBaggage(passengers);
-        }
-
-        public int GetSeatsTaken()
-        {
-            return passengers.Count();
-        }
+        public int GetExpectedBaggageFromFlight() => baggageCalculator.CalculateBaggage(passengers);
 
         public FlightInformation GetFlightInformation()
         {
             double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
             string flightRouteTitle = flightRoute.Title;
-            int aircraftNumberOfSeats = Aircraft.NumberOfSeats;
-            int seatsTaken = GetSeatsTaken();
+            int aircraftNumberOfSeats = aircraft.NumberOfSeats;
+            int seatsTaken = SeatsOccupied;
             int expectedBaggageFromFlight = GetExpectedBaggageFromFlight();
 
             return new FlightInformation()

@@ -1,4 +1,5 @@
-﻿using FlightBooking.Core.Interfaces;
+﻿using FlightBooking.Core.Entities;
+using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +20,7 @@ namespace FlightBooking.Core.Classes
             this.loyaltyPointsCalculator = loyaltyPointsCalculator;
         }
 
-        public void AddPassenger(IPassenger passenger)
+        public void AddPassenger(Passenger passenger)
         {
             if (loyaltyPointsCalculator.CalculateLoyaltyPoints(passenger, flightRoute, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued))
             {
@@ -30,7 +31,7 @@ namespace FlightBooking.Core.Classes
             scheduledFlight.AddPassenger(passenger);
         }
 
-        public void AddPassengers(IEnumerable<IPassenger> passengers)
+        public void AddPassengers(IEnumerable<Passenger> passengers)
         {
             passengers.ToList().ForEach(p => AddPassenger(p));
         }
