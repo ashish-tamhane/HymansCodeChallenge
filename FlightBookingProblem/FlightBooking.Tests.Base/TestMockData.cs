@@ -6,6 +6,7 @@ using FlightBooking.Entities.Enumerations;
 using FlightBooking.Manager.Classes;
 using System.Collections.Generic;
 using FlightBooking.BaggageCalculator.Classes;
+using FlightBooking.Core.Interfaces;
 
 namespace FlightBooking.Core.Tests
 {

@@ -54,6 +54,10 @@
       <Project>{1E006604-66ED-4114-80B0-DD0413A80180}</Project>
       <Name>FlightBooking.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.LoyaltyPointsCalculator\FlightBooking.LoyaltyPointsCalculator.csproj">
+      <Project>{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}</Project>
+      <Name>FlightBooking.LoyaltyPointsCalculator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
