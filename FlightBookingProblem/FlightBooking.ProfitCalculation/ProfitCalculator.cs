@@ -11,10 +11,12 @@ namespace FlightBooking.Core.Classes.FinanceCalculations
     {
         public double CalculateProfit(IEnumerable<Passenger> passengerCollection, double basePrice)
         {
-            return passengerCollection.Sum(p =>
-                        p.Type == PassengerType.AirlineEmployee ? 0
-                                                    : (p.Type == PassengerType.General ? basePrice
-                                                                : (p.IsUsingLoyaltyPoints ? 0 : basePrice)));
+            return passengerCollection.Sum
+                (p =>
+                    p.Type == PassengerType.AirlineEmployee ? 0 
+                            : (p.Type == PassengerType.Discounted ? basePrice / 2 
+                                : (p.Type == PassengerType.General ? basePrice
+                                    : (p.IsUsingLoyaltyPoints ? 0 : basePrice))));
         }
     }
 }

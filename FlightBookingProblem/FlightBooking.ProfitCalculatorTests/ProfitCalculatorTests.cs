@@ -17,6 +17,24 @@ namespace FlightBooking.Core.Tests
         }
 
         [TestMethod]
+        public void TestChallengeExampleWithDiscountedPassenger()
+        {
+            IProfitCalculator profitCalculator = new ProfitCalculator();
+            double profit = profitCalculator.CalculateProfit(TestMockData.GetPassengersWithDiscountedPassenger(), 100);
+
+            Assert.AreEqual(850, profit);
+        }
+
+        [TestMethod]
+        public void TestEachPersonExampleWithDiscountedPassenger()
+        {
+            IProfitCalculator profitCalculator = new ProfitCalculator();
+            double profit = profitCalculator.CalculateProfit(TestMockData.GetEachPassengerWithDiscountedPassenger(), 100);
+
+            Assert.AreEqual(250, profit);
+        }
+
+        [TestMethod]
         public void TestEachPersonExample()
         {
             IProfitCalculator profitCalculator = new ProfitCalculator();
