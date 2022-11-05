@@ -70,6 +70,10 @@
       <Project>{f2f7b14f-529a-41ab-a703-d96606f8b350}</Project>
       <Name>FlightBooking.Manager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.ProfitCalculation\FlightBooking.ProfitCalculation.csproj">
+      <Project>{167ab064-6ece-4424-9719-7826c092c2b0}</Project>
+      <Name>FlightBooking.ProfitCalculation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
