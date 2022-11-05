@@ -9,6 +9,7 @@ namespace FlightBooking.Core.Interfaces
         IFlightRoute FlightRoute { get; }
         List<Passenger> Passengers { get; }
         int SeatsOccupied { get; }
+        double TotalSeats { get; }
 
         void AddPassenger(Passenger passenger);        
         

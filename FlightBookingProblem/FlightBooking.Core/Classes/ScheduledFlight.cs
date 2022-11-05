@@ -17,6 +17,8 @@ namespace FlightBooking.Core.Classes
         public List<Passenger> Passengers => passengers;
         public int SeatsOccupied => Passengers.Count();
 
+        public double TotalSeats => aircraft.NumberOfSeats;
+
         public ScheduledFlight(IFlightRoute flightRoute,
             IBaggageCalculator baggageCalculator,
             Plane plane)

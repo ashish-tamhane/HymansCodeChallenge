@@ -11,7 +11,8 @@ namespace FlightBooking.Core.Classes
         private static string INDENTATION = "    ";
 
         public static string GenerateSummary(IEnumerable<Passenger> passengers,
-            FlightInformation summaryDetails
+            FlightInformation summaryDetails,
+            FlightManager flightManager
             )
         {
             string VERTICAL_WHITE_SPACE = Environment.NewLine + Environment.NewLine;
@@ -48,11 +49,16 @@ namespace FlightBooking.Core.Classes
 
             result += VERTICAL_WHITE_SPACE;
 
-            if (FlightProceedCheck(summaryDetails.seatsTaken, summaryDetails.profitSurplus, summaryDetails.aircraftNumberOfSeats, 
-                summaryDetails.flightRouteMinimumTakeOffPercentage))
+            if (flightManager.FlightProceedCheck())
                 result += "THIS FLIGHT MAY PROCEED";
             else
                 result += "FLIGHT MAY NOT PROCEED";
+
+            //if ( FlightProceedCheck(summaryDetails.seatsTaken, summaryDetails.profitSurplus, summaryDetails.aircraftNumberOfSeats, 
+            //    summaryDetails.flightRouteMinimumTakeOffPercentage))
+            //    result += "THIS FLIGHT MAY PROCEED";
+            //else
+            //    result += "FLIGHT MAY NOT PROCEED";
 
             return result;
         }

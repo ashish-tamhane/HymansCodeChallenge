@@ -1,6 +1,8 @@
 ﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Classes.FinanceCalculations;
 using FlightBooking.Core.Entities;
 using FlightBooking.Core.Enumerations;
+using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Collections.Generic;
 
 namespace FlightBooking.Core.Tests
@@ -148,7 +150,9 @@ THIS FLIGHT MAY PROCEED";
                 new BaggageCalculator(),
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
 
-            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator());
+            IFlightFinance flightFinance = new FlightFinance(_scheduledFlight, londonToParis, new ProfitCalculator());
+
+            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator(), flightFinance);
             flightManager.AddPassengers(GetPassengers());                        
         }
     }
