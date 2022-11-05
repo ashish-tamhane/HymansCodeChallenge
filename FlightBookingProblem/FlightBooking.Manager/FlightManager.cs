@@ -42,7 +42,8 @@ namespace FlightBooking.Manager.Classes
             scheduledFlight.AddPassenger(passenger);
         }
 
-        public void AddPassengers(IEnumerable<Passenger> passengers) => passengers.ToList().ForEach(p => AddPassenger(p));
+        public void AddPassengers(IEnumerable<Passenger> passengers) 
+            => passengers.ToList().ForEach(p => AddPassenger(p));
 
         public bool FlightProceedCheck() 
             => flightFinance.ProfitSurplus() > 0 &&

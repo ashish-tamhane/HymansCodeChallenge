@@ -23,29 +23,45 @@ namespace FlightBookingProblem
             {
                 command = Console.ReadLine() ?? "";
                 var enteredText = command.ToLower();
-                if (enteredText.Contains("print summary"))
+                if (enteredText.Contains("ruleset"))
                 {
-                    Console.WriteLine();
-                    
                     FlightInformation flightInformation = _scheduledFlight.GetFlightInformation();
-                    
+
                     FlightFinance flightFinance = new FlightFinance(_scheduledFlight, _scheduledFlight.FlightRoute, new ProfitCalculator());
                     flightInformation.costOfFlight = flightFinance.CostOfFlight();
                     flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
-                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();                    
-                    
+                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();
+
                     flightInformation.totalLoyaltyPointsAccrued = flightManager.TotalLoyaltyPointsAccrued;
                     flightInformation.totalLoyaltyPointsRedeemed = flightManager.TotalLoyaltyPointsRedeemed;
 
+                    Console.WriteLine();
                     Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, flightInformation, flightManager));
+                }
+                else if (enteredText.Contains("print summary"))
+                {
+                    Console.WriteLine("Select ruleset: ");
+                    Console.WriteLine("Default ruleset");
+                    Console.WriteLine("Relaxed ruleset");
+                    Console.WriteLine();                    
+                }
+                else if (enteredText.Contains("add discounted"))
+                {
+                    string[] passengerSegments = enteredText.Split(' ');
+                    flightManager.AddPassenger(new Passenger
+                    {
+                        Type = PassengerType.Discounted,
+                        Name = passengerSegments[2],
+                        Age = Convert.ToInt32(passengerSegments[3])
+                    });
                 }
                 else if (enteredText.Contains("add general"))
                 {
                     string[] passengerSegments = enteredText.Split(' ');
                     flightManager.AddPassenger(new Passenger
                     {
-                        Type = PassengerType.General, 
-                        Name = passengerSegments[2], 
+                        Type = PassengerType.General,
+                        Name = passengerSegments[2],
                         Age = Convert.ToInt32(passengerSegments[3])
                     });
                 }
@@ -54,8 +70,8 @@ namespace FlightBookingProblem
                     string[] passengerSegments = enteredText.Split(' ');
                     flightManager.AddPassenger(new Passenger
                     {
-                        Type = PassengerType.LoyaltyMember, 
-                        Name = passengerSegments[2], 
+                        Type = PassengerType.LoyaltyMember,
+                        Name = passengerSegments[2],
                         Age = Convert.ToInt32(passengerSegments[3]),
                         LoyaltyPoints = Convert.ToInt32(passengerSegments[4]),
                         IsUsingLoyaltyPoints = Convert.ToBoolean(passengerSegments[5]),
@@ -66,8 +82,8 @@ namespace FlightBookingProblem
                     string[] passengerSegments = enteredText.Split(' ');
                     flightManager.AddPassenger(new Passenger
                     {
-                        Type = PassengerType.AirlineEmployee, 
-                        Name = passengerSegments[2], 
+                        Type = PassengerType.AirlineEmployee,
+                        Name = passengerSegments[2],
                         Age = Convert.ToInt32(passengerSegments[3]),
                     });
                 }
