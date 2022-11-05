@@ -8,37 +8,30 @@ namespace FlightBooking.Core.Classes
     public class ScheduledFlight : IScheduledFlight
     {
         //Loyalty points calculation should be outside ScheduledFlight
-        private readonly ILoyaltyPointsCalculator loyaltyCalculator;
-
-        //Profit calculation should be outside ScheduledFlight
-        private readonly IProfitCalculator profitCalculator;
+        private readonly ILoyaltyPointsCalculator loyaltyCalculator;        
 
         private readonly IPlane Aircraft;
         private readonly List<IPassenger> passengers;
         private readonly IBaggageCalculator baggageCalculator;
         private readonly IFlightRoute flightRoute;
-        
-        
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public IFlightRoute FlightRoute => FlightRoute;
+        public IFlightRoute FlightRoute => flightRoute;
 
         public List<IPassenger> Passengers => passengers;
 
-        
+
 
         public ScheduledFlight(IFlightRoute flightRoute,
-            ILoyaltyPointsCalculator loyaltyCalculator,
-            IProfitCalculator profitCalculator,
+            ILoyaltyPointsCalculator loyaltyCalculator,            
             IBaggageCalculator baggageCalculator,
             IPlane plane
             )
         {
             this.flightRoute = flightRoute;
-            this.loyaltyCalculator = loyaltyCalculator;
-            this.profitCalculator = profitCalculator;
+            this.loyaltyCalculator = loyaltyCalculator;            
             this.baggageCalculator = baggageCalculator;
             passengers = new List<IPassenger>();
             Aircraft = plane;
@@ -66,44 +59,23 @@ namespace FlightBooking.Core.Classes
             return baggageCalculator.CalculateBaggage(passengers);
         }
 
-        public double GetExpectedProfitFromFlight()
-        {
-            return profitCalculator.CalculateProfit(passengers, flightRoute.BasePrice);
-        }
-
-
-        public double GetFlightCost()
-        {
-            return passengers.Sum(p => flightRoute.BaseCost);
-        }
-
         public int GetSeatsTaken()
         {
             return passengers.Count();
         }
 
-        private static double GetProfitSurplus(double costOfFlight, double profitFromFlight)
-        {
-            return profitFromFlight - costOfFlight;
-        }
-       
         public FlightInformation GetFlightInformation()
         {
-            double costOfFlight = GetFlightCost();
-            double profitFromFlight = GetExpectedProfitFromFlight();
-            int seatsTaken = GetSeatsTaken();
-            double profitSurplus = GetProfitSurplus(costOfFlight, profitFromFlight);
-            int expectedBaggageFromFlight = GetExpectedBaggageFromFlight();
+            double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
+
             string flightRouteTitle = flightRoute.Title;
             int aircraftNumberOfSeats = Aircraft.NumberOfSeats;
-            double flightRouteMinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage;
+            int seatsTaken = GetSeatsTaken();
+            int expectedBaggageFromFlight = GetExpectedBaggageFromFlight();
 
             return new FlightInformation()
             {
-                costOfFlight = costOfFlight,
-                profitFromFlight = profitFromFlight,
                 seatsTaken = seatsTaken,
-                profitSurplus = profitSurplus,
                 expectedBaggageFromFlight = expectedBaggageFromFlight,
                 flightRouteTitle = flightRouteTitle,
                 aircraftNumberOfSeats = aircraftNumberOfSeats,

@@ -21,7 +21,15 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestGetSummary()
         {
-            string output = SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, _scheduledFlight.GetFlightInformation());            
+            FlightInformation flightInformation = _scheduledFlight.GetFlightInformation();
+            FlightFinance flightFinance = new FlightFinance(_scheduledFlight, _scheduledFlight.FlightRoute, new ProfitCalculator());
+
+            flightInformation.costOfFlight = flightFinance.CostOfFlight();
+            flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
+            flightInformation.profitSurplus = flightFinance.ProfitSurplus();
+
+            string output = SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, flightInformation);
+
             Assert.AreEqual(TestMockData.ExpectedConsoleOutput, output);
         }
 
@@ -35,15 +43,7 @@ namespace FlightBooking.Core.Tests
 
         }
 
-        [TestMethod]
-        public void TestProfitFromFlight()
-        {
-            double output = _scheduledFlight.GetExpectedProfitFromFlight();
-            double expectedBaggageFromFlight = 800;
-
-            Assert.AreEqual(expectedBaggageFromFlight, output);
-
-        }
+       
 
         [TestMethod]
         public void TestLoyaltyPointsFromFlight()
@@ -53,15 +53,7 @@ namespace FlightBooking.Core.Tests
 
         }
 
-        [TestMethod]
-        public void TestFlightCost()
-        {
-            double flightCost = 0;
-
-            flightCost = _scheduledFlight.GetFlightCost();
-
-            Assert.AreEqual(500, flightCost);
-        }
+        
 
         [TestMethod]
         public void TestSeatsTaken()

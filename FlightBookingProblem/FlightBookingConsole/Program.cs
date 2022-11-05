@@ -19,7 +19,14 @@ namespace FlightBookingProblem
                 if (enteredText.Contains("print summary"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, _scheduledFlight.GetFlightInformation()));
+                    FlightInformation flightInformation = _scheduledFlight.GetFlightInformation();
+                    FlightFinance flightFinance = new FlightFinance(_scheduledFlight, _scheduledFlight.FlightRoute, new ProfitCalculator());
+
+                    flightInformation.costOfFlight = flightFinance.CostOfFlight();
+                    flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
+                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();
+
+                    Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, flightInformation));
                 }
                 else if (enteredText.Contains("add general"))
                 {
@@ -77,8 +84,7 @@ namespace FlightBookingProblem
             };
 
             _scheduledFlight = new ScheduledFlight(londonToParis, 
-                new LoyaltyCalculator(), 
-                new ProfitCalculator(), 
+                new LoyaltyCalculator(),                 
                 new BaggageCalculator(),
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });            
         }

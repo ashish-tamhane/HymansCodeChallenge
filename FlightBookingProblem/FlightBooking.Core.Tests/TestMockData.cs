@@ -148,8 +148,7 @@ THIS FLIGHT MAY PROCEED";
             };
 
             _scheduledFlight = new ScheduledFlight(londonToParis, 
-                new LoyaltyCalculator(), 
-                new ProfitCalculator(), 
+                new LoyaltyCalculator(),                 
                 new BaggageCalculator(),
                 new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });            
 
