@@ -6,6 +6,7 @@ namespace FlightBookingProblem
     class Program
     {
         private static ScheduledFlight _scheduledFlight ;
+        private static FlightManager flightManager;
 
         static void Main(string[] args)
         {
@@ -83,10 +84,11 @@ namespace FlightBookingProblem
                 MinimumTakeOffPercentage = 0.7
             };
 
-            _scheduledFlight = new ScheduledFlight(londonToParis, 
-                new LoyaltyCalculator(),                 
+            _scheduledFlight = new ScheduledFlight(londonToParis,                 
                 new BaggageCalculator(),
-                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });            
+                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
+
+            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator());           
         }
     }
 }

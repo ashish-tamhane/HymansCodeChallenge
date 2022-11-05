@@ -137,8 +137,8 @@ THIS FLIGHT MAY PROCEED";
             return passengers;
         }
 
-        public static void SetupAirlineData(out ScheduledFlight _scheduledFlight)
-        {
+        public static void SetupAirlineData(out ScheduledFlight _scheduledFlight, out FlightManager flightManager)
+        {            
             FlightRoute londonToParis = new FlightRoute("London", "Paris")
             {
                 BaseCost = 50,
@@ -147,14 +147,12 @@ THIS FLIGHT MAY PROCEED";
                 MinimumTakeOffPercentage = 0.7
             };
 
-            _scheduledFlight = new ScheduledFlight(londonToParis, 
-                new LoyaltyCalculator(),                 
+            _scheduledFlight = new ScheduledFlight(londonToParis,
                 new BaggageCalculator(),
-                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });            
+                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
 
-            _scheduledFlight.AddPassengers(GetPassengers());
-
-            
+            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator());
+            flightManager.AddPassengers(GetPassengers());                        
         }
     }
 }

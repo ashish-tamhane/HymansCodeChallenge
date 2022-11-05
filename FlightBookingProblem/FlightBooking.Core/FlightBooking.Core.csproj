@@ -41,17 +41,19 @@
   <ItemGroup>
     <Compile Include="Classes\BaggageCalculator.cs" />
     <Compile Include="Classes\FlightFinance.cs" />
+    <Compile Include="Classes\FlightManager.cs" />
     <Compile Include="Classes\FlightRoute.cs" />
     <Compile Include="Classes\SummaryDetails.cs" />
     <Compile Include="Interfaces\IBaggageCalculator.cs" />
     <Compile Include="Interfaces\IFlightFinance.cs" />
+    <Compile Include="Interfaces\IFlightManager.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
     <Compile Include="Interfaces\IFlightRoute.cs" />
     <Compile Include="Interfaces\IPassenger.cs" />
     <Compile Include="Interfaces\IPlane.cs" />
     <Compile Include="Interfaces\IScheduledFlight.cs" />
     <Compile Include="Interfaces\IProfitCalculator.cs" />
-    <Compile Include="Classes\LoyaltyCalculator.cs" />
+    <Compile Include="Classes\LoyaltyPointsCalculator.cs" />
     <Compile Include="Classes\Passenger.cs" />
     <Compile Include="Classes\PassengerType.cs" />
     <Compile Include="Classes\Plane.cs" />

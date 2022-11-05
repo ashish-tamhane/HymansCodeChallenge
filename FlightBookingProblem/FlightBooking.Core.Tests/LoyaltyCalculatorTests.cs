@@ -14,7 +14,7 @@ namespace FlightBooking.Core.Tests
             int totalLoyaltyPointsRedeemed = 0;
             int totalLoyaltyPointsAccrued = 0;
             
-            ILoyaltyPointsCalculator loyaltyPointsCalculator = new LoyaltyCalculator();
+            ILoyaltyPointsCalculator loyaltyPointsCalculator = new LoyaltyPointsCalculator();
             IFlightRoute flightRoute = new FlightRoute("London", "Paris")
             {
                 BaseCost = 50,

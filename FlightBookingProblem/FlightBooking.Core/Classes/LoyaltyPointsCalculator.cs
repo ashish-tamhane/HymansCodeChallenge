@@ -3,7 +3,7 @@ using System;
 
 namespace FlightBooking.Core.Classes
 {
-    public class LoyaltyCalculator : ILoyaltyPointsCalculator
+    public class LoyaltyPointsCalculator : ILoyaltyPointsCalculator
     {
         public bool CalculateLoyaltyPoints(IPassenger passenger, IFlightRoute flightRoute, out int totalLoyaltyPointsRedeemed, out int totalLoyaltyPointsAccrued)
         {

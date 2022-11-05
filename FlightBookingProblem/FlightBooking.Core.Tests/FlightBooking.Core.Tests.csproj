@@ -49,6 +49,7 @@
     <Compile Include="ProfitCalculatorTests.cs" />
     <Compile Include="LoyaltyCalculatorTests.cs" />
     <Compile Include="FlightFinanceTests.cs" />
+    <Compile Include="FlightManagementTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">
