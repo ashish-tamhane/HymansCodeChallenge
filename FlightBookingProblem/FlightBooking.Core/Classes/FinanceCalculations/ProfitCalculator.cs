@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using FlightBooking.Core.Entities;
 using FlightBooking.Core.Enumerations;
+using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Linq;
 
-namespace FlightBooking.Core.Classes
+namespace FlightBooking.Core.Classes.FinanceCalculations
 {
     public class ProfitCalculator : IProfitCalculator
     {
@@ -14,17 +15,6 @@ namespace FlightBooking.Core.Classes
                         p.Type == PassengerType.AirlineEmployee ? 0
                                                     : (p.Type == PassengerType.General ? basePrice
                                                                 : (p.IsUsingLoyaltyPoints ? 0 : basePrice)));
-        }
-    }
-
-    public class ProfitCalculatorII : IProfitCalculatorII
-    {
-        public double CalculateProfit(IScheduledFlight scheduledFlight)
-        {
-            return scheduledFlight.Passengers.Sum(p =>
-                        p.Type == PassengerType.AirlineEmployee ? 0
-                                                    : (p.Type == PassengerType.General ? scheduledFlight.FlightRoute.BasePrice
-                                                                : (p.IsUsingLoyaltyPoints ? 0 : scheduledFlight.FlightRoute.BasePrice)));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FlightBooking.Core.Interfaces
+﻿namespace FlightBooking.Core.Interfaces.FinanceCalculations
 {
     public interface IFlightFinance
     {

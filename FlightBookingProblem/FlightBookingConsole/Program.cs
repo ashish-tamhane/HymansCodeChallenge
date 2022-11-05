@@ -1,6 +1,8 @@
 ﻿using FlightBooking.Core.Classes;
 using FlightBooking.Core.Entities;
 using FlightBooking.Core.Enumerations;
+using FlightBooking.Core.Classes.FinanceCalculations;
+using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System;
 
 namespace FlightBookingProblem

@@ -1,7 +1,8 @@
 ﻿using FlightBooking.Core.Interfaces;
+using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Linq;
 
-namespace FlightBooking.Core.Classes
+namespace FlightBooking.Core.Classes.FinanceCalculations
 {
     public class FlightFinance : IFlightFinance
     {
