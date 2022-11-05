@@ -10,16 +10,16 @@ namespace FlightBooking.Core.Classes
         private readonly Plane aircraft;
         private readonly List<Passenger> passengers;
         private readonly IBaggageCalculator baggageCalculator;
-        private readonly IFlightRoute flightRoute;
+        private readonly FlightRoute flightRoute;
 
-        public IFlightRoute FlightRoute => flightRoute;
+        public FlightRoute FlightRoute => flightRoute;
 
         public List<Passenger> Passengers => passengers;
         public int SeatsOccupied => Passengers.Count();
 
         public double TotalSeats => aircraft.NumberOfSeats;
 
-        public ScheduledFlight(IFlightRoute flightRoute,
+        public ScheduledFlight(FlightRoute flightRoute,
             IBaggageCalculator baggageCalculator,
             Plane plane)
         {

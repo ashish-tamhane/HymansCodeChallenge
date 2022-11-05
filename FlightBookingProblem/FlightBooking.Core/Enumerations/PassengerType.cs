@@ -5,5 +5,5 @@
         General,
         LoyaltyMember,
         AirlineEmployee
-    }
+    }    
 }

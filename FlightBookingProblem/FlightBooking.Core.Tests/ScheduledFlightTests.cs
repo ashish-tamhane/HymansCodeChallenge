@@ -1,5 +1,6 @@
 ﻿using FlightBooking.Core.Classes;
 using FlightBooking.Core.Classes.FinanceCalculations;
+using FlightBooking.Core.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlightBooking.Core.Tests

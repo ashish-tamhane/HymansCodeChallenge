@@ -43,12 +43,11 @@
     <Compile Include="Classes\FinanceCalculations\FlightFinance.cs" />
     <Compile Include="Classes\FlightManager.cs" />
     <Compile Include="Classes\FlightRoute.cs" />
-    <Compile Include="Classes\SummaryDetails.cs" />
+    <Compile Include="Entities\FlightInformation.cs" />
     <Compile Include="Interfaces\IBaggageCalculator.cs" />
     <Compile Include="Interfaces\FinanceCalculations\IFlightFinance.cs" />
     <Compile Include="Interfaces\IFlightManager.cs" />
     <Compile Include="Interfaces\ILoyaltyCalculator.cs" />
-    <Compile Include="Interfaces\IFlightRoute.cs" />
     <Compile Include="Interfaces\IScheduledFlight.cs" />
     <Compile Include="Interfaces\FinanceCalculations\IProfitCalculator.cs" />
     <Compile Include="Classes\LoyaltyPointsCalculator.cs" />

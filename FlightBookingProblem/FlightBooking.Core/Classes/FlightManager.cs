@@ -9,7 +9,7 @@ namespace FlightBooking.Core.Classes
     public class FlightManager : IFlightManager
     {
         private IScheduledFlight scheduledFlight;
-        private readonly IFlightRoute flightRoute;
+        private readonly FlightRoute flightRoute;
         private readonly ILoyaltyPointsCalculator loyaltyPointsCalculator;
         private readonly IFlightFinance flightFinance;
 
@@ -19,7 +19,7 @@ namespace FlightBooking.Core.Classes
         public IFlightFinance FlightFinance => flightFinance;
 
         public FlightManager(IScheduledFlight scheduledFlight, 
-            IFlightRoute flightRoute, 
+            FlightRoute flightRoute, 
             ILoyaltyPointsCalculator loyaltyPointsCalculator,
             IFlightFinance flightFinance)
         {

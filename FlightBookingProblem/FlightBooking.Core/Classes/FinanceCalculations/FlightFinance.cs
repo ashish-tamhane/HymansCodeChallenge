@@ -7,10 +7,10 @@ namespace FlightBooking.Core.Classes.FinanceCalculations
     public class FlightFinance : IFlightFinance
     {
         private readonly IScheduledFlight scheduledFlight;
-        private IFlightRoute flightRoute;
+        private FlightRoute flightRoute;
         private IProfitCalculator profitCalculator;
         
-        public FlightFinance(IScheduledFlight scheduledFlight, IFlightRoute flightRoute, IProfitCalculator profitCalculator)
+        public FlightFinance(IScheduledFlight scheduledFlight, FlightRoute flightRoute, IProfitCalculator profitCalculator)
         {
             this.scheduledFlight = scheduledFlight;
             this.flightRoute = flightRoute;

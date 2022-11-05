@@ -2,7 +2,7 @@
 
 namespace FlightBooking.Core.Classes
 {
-    public class FlightRoute : IFlightRoute
+    public class FlightRoute
     {
         private readonly string _origin;
         private readonly string _destination;

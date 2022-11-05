@@ -6,7 +6,7 @@ namespace FlightBooking.Core.Interfaces
 {
     public interface IScheduledFlight
     {
-        IFlightRoute FlightRoute { get; }
+        FlightRoute FlightRoute { get; }
         List<Passenger> Passengers { get; }
         int SeatsOccupied { get; }
         double TotalSeats { get; }
