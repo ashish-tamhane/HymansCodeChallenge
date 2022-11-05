@@ -1,10 +1,12 @@
-﻿using FlightBooking.Core.Entities;
+﻿using FlightBooking.Core.Classes;
+using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
+using FlightBooking.Manager.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FlightBooking.Core.Classes
+namespace FlightBooking.Manager.Classes
 {
     public class FlightManager : IFlightManager
     {

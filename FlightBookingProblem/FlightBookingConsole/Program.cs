@@ -4,6 +4,7 @@ using FlightBooking.Core.Enumerations;
 using FlightBooking.Core.Classes.FinanceCalculations;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System;
+using FlightBooking.Manager.Classes;
 
 namespace FlightBookingProblem
 {

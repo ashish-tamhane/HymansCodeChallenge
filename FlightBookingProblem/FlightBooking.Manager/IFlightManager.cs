@@ -3,7 +3,7 @@ using FlightBooking.Core.Entities;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Collections.Generic;
 
-namespace FlightBooking.Core.Interfaces
+namespace FlightBooking.Manager.Interfaces
 {
     public interface IFlightManager
     {

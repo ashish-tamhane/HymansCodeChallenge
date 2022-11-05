@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.Core", "Fligh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.Core.Tests", "FlightBooking.Core.Tests\FlightBooking.Core.Tests.csproj", "{792C4E43-18D0-47C2-9A53-266E47DA261E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.Manager", "FlightBooking.Manager\FlightBooking.Manager.csproj", "{F2F7B14F-529A-41AB-A703-D96606F8B350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightBooking.UserInterface", "FlightBooking.UserInterface\FlightBooking.UserInterface.csproj", "{EE285E3E-9707-4E65-BC47-F0B509A08FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{792C4E43-18D0-47C2-9A53-266E47DA261E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{792C4E43-18D0-47C2-9A53-266E47DA261E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{792C4E43-18D0-47C2-9A53-266E47DA261E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F7B14F-529A-41AB-A703-D96606F8B350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F7B14F-529A-41AB-A703-D96606F8B350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F7B14F-529A-41AB-A703-D96606F8B350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F7B14F-529A-41AB-A703-D96606F8B350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE285E3E-9707-4E65-BC47-F0B509A08FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE285E3E-9707-4E65-BC47-F0B509A08FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE285E3E-9707-4E65-BC47-F0B509A08FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE285E3E-9707-4E65-BC47-F0B509A08FCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

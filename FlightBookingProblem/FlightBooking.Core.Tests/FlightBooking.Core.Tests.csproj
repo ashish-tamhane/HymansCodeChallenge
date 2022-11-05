@@ -64,6 +64,14 @@
       <Project>{22F6B34B-9154-4944-B1FD-D5564E250AE9}</Project>
       <Name>FlightBooking.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.Manager\FlightBooking.Manager.csproj">
+      <Project>{F2F7B14F-529A-41AB-A703-D96606F8B350}</Project>
+      <Name>FlightBooking.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.UserInterface\FlightBooking.UserInterface.csproj">
+      <Project>{ee285e3e-9707-4e65-bc47-f0b509a08fcd}</Project>
+      <Name>FlightBooking.UserInterface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

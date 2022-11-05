@@ -1,5 +1,6 @@
 ﻿using FlightBooking.Core.Entities;
 using FlightBooking.Core.Enumerations;
+using FlightBooking.Manager.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
