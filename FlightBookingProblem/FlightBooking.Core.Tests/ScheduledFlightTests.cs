@@ -11,41 +11,23 @@ namespace FlightBooking.Core.Tests
 {
     [TestClass]
     public class ScheduledFlightTests
-    {
-        
-
+    {        
         private static ScheduledFlight scheduledFlight;
         private FlightManager flightManager;
 
-        [TestInitialize]
-        public void TestInit()
-        {
-            TestMockData.SetupAirlineData(out scheduledFlight, out flightManager);
-        }
-
         [TestMethod]
-        public void TestGetSummary()
+        public void TestTooManyPassengers()
         {
+            TestMockData.SetupAirlineDataForTooManyPassengers(out scheduledFlight, out flightManager);
             string output = SummaryGenerator.GenerateSummary(flightManager);
 
-            Assert.AreEqual(TestMockData.ExpectedConsoleOutput.Trim(), output.Trim()) ;
+            Assert.AreEqual(TestMockData.ExpectedConsoleOutputForTooManyPassengers.Trim(), output.Trim());
         }
 
         [TestMethod]
-        public void TestAvailablePlanes()
+        public void TestGetSummaryForRelaxedRuleSetAndDefaultPassengers()
         {
-            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
-            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
-            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
-            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
-            
-
-            Assert.AreEqual(1, flightManager.AvailablePlanes(flightManager.GetFlightInformation().seatsTaken).Count());
-        }
-
-        [TestMethod]
-        public void TestGetSummaryForRelaxedRuleSet()
-        {
+            TestMockData.SetupAirlineData(out scheduledFlight, out flightManager);
             flightManager.FlightValidationType = FlightValidationType.RelaxedRuleset;
             string output = SummaryGenerator.GenerateSummary(flightManager);
 
@@ -53,8 +35,30 @@ namespace FlightBooking.Core.Tests
         }
 
         [TestMethod]
+        public void TestGetSummaryWithDefaultRuleSetAndMoreAirlineEmployees()
+        {
+            TestMockData.SetupAirlineDataForRelaxedRuleSet(out scheduledFlight, out flightManager);            
+            string output = SummaryGenerator.GenerateSummary(flightManager);
+
+            Assert.AreEqual(TestMockData.ExpectedConsoleOutputForDefaultRuleSetWithMoreAirlineEmployees.Trim(), output.Trim());
+        }
+
+        [TestMethod]
+        public void TestGetSummaryWithRelaxedRuleSetAndMoreAirlineEmployees()
+        {
+            TestMockData.SetupAirlineDataForRelaxedRuleSet(out scheduledFlight, out flightManager);
+            flightManager.FlightValidationType = FlightValidationType.RelaxedRuleset;
+            string output = SummaryGenerator.GenerateSummary(flightManager);
+
+            Assert.AreEqual(TestMockData.ExpectedConsoleOutputForRelaxedRuleSet.Trim(), output.Trim());
+        }
+        
+        
+
+        [TestMethod]
         public void TestGetFlightInformation()
         {
+            TestMockData.SetupAirlineData(out scheduledFlight, out flightManager);
             FlightInformation flightInformation = flightManager.GetFlightInformation();
             
             Assert.AreEqual(12, flightInformation.aircraftNumberOfSeats);
@@ -79,25 +83,12 @@ namespace FlightBooking.Core.Tests
 
         }
 
-        [TestMethod]
-        public void TestBaggageFromFlight()
-        {
-            int output = scheduledFlight.GetExpectedBaggageFromFlight();
-            int expectedBaggageFromFlight = 13;
-
-            Assert.AreEqual(expectedBaggageFromFlight, output);
-
-        }
-
-       
-
-        
-
         
 
         [TestMethod]
         public void TestSeatsTaken()
         {
+            TestMockData.SetupAirlineData(out scheduledFlight, out flightManager);
             double seatsTaken = scheduledFlight.SeatsOccupied;
             Assert.AreEqual(10, seatsTaken);
         }

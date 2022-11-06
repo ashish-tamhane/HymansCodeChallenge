@@ -1,6 +1,8 @@
 ﻿using FlightBooking.BaggageCalculator.Classes;
 using FlightBooking.BaggageCalculator.Interfaces;
+using FlightBooking.Core.Classes;
 using FlightBooking.Entities.Models;
+using FlightBooking.Manager.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -9,6 +11,9 @@ namespace FlightBooking.Core.Tests
     [TestClass]
     public class BaggageCalculatorTests
     {
+        private static ScheduledFlight scheduledFlight;
+        private FlightManager flightManager;
+
         [TestMethod]
         public void TestChallengeBaggage()
         {
@@ -62,6 +67,16 @@ namespace FlightBooking.Core.Tests
 
             Assert.AreEqual(0, baggageCount);
 
+        }
+
+        [TestMethod]
+        public void TestBaggageFromFlight()
+        {
+            TestMockData.SetupAirlineData(out scheduledFlight, out flightManager);
+            int output = scheduledFlight.GetExpectedBaggageFromFlight();
+            int expectedBaggageFromFlight = 13;
+
+            Assert.AreEqual(expectedBaggageFromFlight, output);
         }
     }
 }

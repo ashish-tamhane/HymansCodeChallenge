@@ -67,11 +67,11 @@ namespace FlightBooking.Manager.Classes
                 case FlightValidationType.RelaxedRuleset:
                     flightValidation = new FlightRelaxedRuleSetValidation()
                     {
-                        profitSurplus = flightFinance.ProfitSurplus(),
-                        seatsOccupied = scheduledFlight.SeatsOccupied,
-                        totalSeats = scheduledFlight.TotalSeats,
-                        minimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage,
-                        totalAirLineEmployees = scheduledFlight.GetFlightInformation().airlineSeats
+                        ProfitSurplus = flightFinance.ProfitSurplus(),
+                        SeatsOccupied = scheduledFlight.SeatsOccupied,
+                        TotalSeats = scheduledFlight.TotalSeats,
+                        MinimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage,
+                        TotalAirLineEmployees = scheduledFlight.GetFlightInformation().airlineSeats
                     };
                     break;
             }

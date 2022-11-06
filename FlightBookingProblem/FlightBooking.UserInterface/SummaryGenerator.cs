@@ -46,7 +46,7 @@ namespace FlightBooking.Core.Classes
             }
             else
             {
-                sb.AppendLine("FLIGHT MAY NOT PROCEED");
+                sb.AppendLine("THIS FLIGHT MAY NOT PROCEED");
                 if (flightManager.ArePassengersMoreThanSeats())
                 {
                     var availablePlanes = flightManager.AvailablePlanes(flightManager.GetPassengers().Count());

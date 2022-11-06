@@ -23,11 +23,11 @@
 
             if (!returned)
             {
-                if (ProfitSurplus > 0)
+                if (ProfitSurplus < 0)
                 { validationMessage = "Profit generated failed to pass as per default ruleset."; }
-                else if (SeatsOccupied < TotalSeats)
+                else if (SeatsOccupied > TotalSeats)
                 { validationMessage = "Seats occupied are more than total seats."; }
-                else if (SeatsOccupied / TotalSeats > MinimumTakeOffPercentage)
+                else if (SeatsOccupied / TotalSeats < MinimumTakeOffPercentage)
                 { validationMessage = "Minimum number of seats occupied not as per required percentage."; }
             }
             output = validationMessage;

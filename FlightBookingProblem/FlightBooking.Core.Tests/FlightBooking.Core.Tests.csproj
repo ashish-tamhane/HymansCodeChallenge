@@ -45,6 +45,7 @@
     <Compile Include="ScheduledFlightTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FlightFinanceTests.cs" />
+    <Compile Include="AircraftTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">
