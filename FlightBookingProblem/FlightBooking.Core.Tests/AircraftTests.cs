@@ -25,5 +25,17 @@ namespace FlightBooking.Core.Tests
 
             Assert.AreEqual(1, flightManager.AvailablePlanes(flightManager.GetFlightInformation().seatsTaken).Count());
         }
+
+        [TestMethod]
+        public void TestDefaultPlanes()
+        {
+            var planes = PlanesList.Planes;
+
+            CollectionAssert.AllItemsAreUnique(planes);
+
+            Assert.AreEqual(planes.First(p => p.Name == "Antonov AN-2").Name, "Antonov AN-2");
+            Assert.AreEqual(planes.First(p => p.Name == "Bombardier Q400").Name, "Bombardier Q400");
+            Assert.AreEqual(planes.First(p => p.Name == "ATR 640").Name, "ATR 640");
+        }
     }
 }

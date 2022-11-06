@@ -79,6 +79,7 @@ namespace FlightBooking.Core.Tests
                 Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.Type == item.Type && p.Name == item.Name));
                 Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.IsUsingLoyaltyPoints == item.IsUsingLoyaltyPoints && p.Name == item.Name));
                 Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.Age == item.Age && p.Name == item.Name));
+                Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.AllowedBags == item.AllowedBags && p.Name == item.Name));
             }
 
         }
