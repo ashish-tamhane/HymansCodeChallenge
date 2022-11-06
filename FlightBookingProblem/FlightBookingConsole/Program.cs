@@ -25,17 +25,25 @@ namespace FlightBookingProblem
             {
                 command = Console.ReadLine() ?? "";
                 var enteredText = command.ToLower();
-                if (enteredText.Contains("ruleset"))
+                if (enteredText.Contains("default") || enteredText.Contains("relaxed"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine(SummaryGenerator.GenerateSummary(flightManager));
+
+                    flightManager.FlightValidationType = enteredText.Contains("default")
+                        ? FlightValidationType.DefaultRuleset : FlightValidationType.RelaxedRuleset;
+
+                    Console.WriteLine("Ruleset selected: " + flightManager.FlightValidationType.ToString());
+                }
+                else if (enteredText.Contains("view ruleset"))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Rulesets available:");
+                    Console.WriteLine("Default ruleset");
+                    Console.WriteLine("Relaxed ruleset");
                 }
                 else if (enteredText.Contains("print summary"))
                 {
-                    Console.WriteLine("Select ruleset: ");
-                    Console.WriteLine("Default ruleset");
-                    Console.WriteLine("Relaxed ruleset");
-                    Console.WriteLine();
+                    Console.WriteLine(SummaryGenerator.GenerateSummary(flightManager));
                 }
                 else if (enteredText.Contains("add discounted"))
                 {

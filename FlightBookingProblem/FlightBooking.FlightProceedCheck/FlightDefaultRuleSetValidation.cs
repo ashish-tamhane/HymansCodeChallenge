@@ -2,11 +2,11 @@
 {
     public class FlightDefaultRuleSetValidation : IFlightValidation
     {
-        public double profitSurplus { get; set; }
+        public double ProfitSurplus { get; set; }
         
-        public int seatsOccupied { get; set; }
-        public double totalSeats { get; set; }
-        public double minimumTakeOffPercentage { get; set; }
+        public int SeatsOccupied { get; set; }
+        public double TotalSeats { get; set; }
+        public double MinimumTakeOffPercentage { get; set; }
 
         public FlightDefaultRuleSetValidation()
         {
@@ -15,12 +15,23 @@
 
         public bool ValidateCondition(out string output)
         {                        
-            bool returned = profitSurplus > 0 &&
-                                seatsOccupied < totalSeats &&
-                                seatsOccupied / totalSeats > minimumTakeOffPercentage;
+            bool returned = ProfitSurplus > 0 &&
+                                SeatsOccupied < TotalSeats &&
+                                SeatsOccupied / TotalSeats > MinimumTakeOffPercentage;
 
-            output = returned ? string.Empty : "Flight failed to pass Default ruleset.";
-            
+            string validationMessage = string.Empty;
+
+            if (!returned)
+            {
+                if (ProfitSurplus > 0)
+                { validationMessage = "Profit generated failed to pass as per default ruleset."; }
+                else if (SeatsOccupied < TotalSeats)
+                { validationMessage = "Seats occupied are more than total seats."; }
+                else if (SeatsOccupied / TotalSeats > MinimumTakeOffPercentage)
+                { validationMessage = "Minimum number of seats occupied not as per required percentage."; }
+            }
+            output = validationMessage;
+
             return returned;
         }
     }

@@ -12,6 +12,5 @@
         public double flightRouteMinimumTakeOffPercentage { get; set; }
         public int totalLoyaltyPointsAccrued { get; set; }
         public int totalLoyaltyPointsRedeemed { get; set; }
-
     }
 }

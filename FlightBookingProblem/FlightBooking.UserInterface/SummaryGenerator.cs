@@ -11,7 +11,7 @@ namespace FlightBooking.Core.Classes
 {
     public static class SummaryGenerator
     {
-        private static string INDENTATION = "    ";
+        private static readonly string INDENTATION = "    ";
 
         public static string GenerateSummary(
             IFlightManager flightManager
@@ -40,7 +40,7 @@ namespace FlightBooking.Core.Classes
             sb.AppendLine();            
             sb.AppendLine();
 
-            if (flightManager.FlightProceedCheck())
+            if (flightManager.FlightProceedCheck(out string validationMessage))
             {
                 sb.Append("THIS FLIGHT MAY PROCEED");
             }
@@ -61,10 +61,8 @@ namespace FlightBooking.Core.Classes
             
             return sb.ToString();
         }
-        private static string GetTotalExpectedBaggage(int expectedBaggageFromFlight)
-        {
-            return "Total expected baggage: " + expectedBaggageFromFlight;
-        }
+        private static string GetTotalExpectedBaggage(int expectedBaggageFromFlight) 
+            => "Total expected baggage: " + expectedBaggageFromFlight;
 
         private static string GetTotalLoyaltyPointsRedeemed(int totalLoyaltyPointsRedeemed)
         {

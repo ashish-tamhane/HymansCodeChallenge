@@ -1,6 +1,7 @@
 ﻿using FlightBooking.Entities.Models;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using System.Collections.Generic;
+using FlightBooking.FlightProceedCheck;
 
 namespace FlightBooking.Manager.Interfaces
 {
@@ -14,10 +15,11 @@ namespace FlightBooking.Manager.Interfaces
 
         IFlightFinance FlightFinance { get;}
 
-        bool FlightProceedCheck();
+        bool FlightProceedCheck(out string validation);
 
         bool ArePassengersMoreThanSeats();
 
+        FlightValidationType FlightValidationType { get; set; }
         IEnumerable<Plane> AvailablePlanes(int passengerCount);
 
         IEnumerable<Passenger> GetPassengers();
