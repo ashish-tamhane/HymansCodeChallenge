@@ -10,7 +10,6 @@ namespace FlightBooking.Core.Interfaces
         List<Passenger> Passengers { get; }
         int SeatsOccupied { get; }
 
-        int AirLineSeats { get; }
         double TotalSeats { get; }
 
         void AddPassenger(Passenger passenger);        

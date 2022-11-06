@@ -19,9 +19,7 @@ namespace FlightBooking.Core.Classes
         public List<Passenger> Passengers => passengers;
         public int SeatsOccupied => Passengers.Count();
 
-        public double TotalSeats => aircraft.NumberOfSeats;
-
-        public int AirLineSeats => passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
+        public double TotalSeats => aircraft.NumberOfSeats;        
 
         public ScheduledFlight(FlightRoute flightRoute,
             IBaggageCalculator baggageCalculator,
@@ -52,7 +50,8 @@ namespace FlightBooking.Core.Classes
                 expectedBaggageFromFlight = expectedBaggageFromFlight,
                 flightRouteTitle = flightRouteTitle,
                 aircraftNumberOfSeats = aircraftNumberOfSeats,
-                flightRouteMinimumTakeOffPercentage = flightRouteMinimumTakeOffPercentage
+                flightRouteMinimumTakeOffPercentage = flightRouteMinimumTakeOffPercentage,
+                airlineSeats = passengers.Count(p => p.Type == PassengerType.AirlineEmployee)
             };
         }
     }

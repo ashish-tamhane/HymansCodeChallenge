@@ -64,60 +64,27 @@ namespace FlightBooking.Core.Classes
         private static string GetTotalExpectedBaggage(int expectedBaggageFromFlight) 
             => "Total expected baggage: " + expectedBaggageFromFlight;
 
-        private static string GetTotalLoyaltyPointsRedeemed(int totalLoyaltyPointsRedeemed)
-        {
-            return "Total loyalty points redeemed: " + totalLoyaltyPointsRedeemed;
-        }
+        private static string GetTotalLoyaltyPointsRedeemed(int totalLoyaltyPointsRedeemed) => "Total loyalty points redeemed: " + totalLoyaltyPointsRedeemed;
 
-        private static string GetLoyaltyPointsGivenAway(int totalLoyaltyPointsAccrued)
-        {
-            return "Total loyalty points given away: " + totalLoyaltyPointsAccrued;
-        }
+        private static string GetLoyaltyPointsGivenAway(int totalLoyaltyPointsAccrued) => "Total loyalty points given away: " + totalLoyaltyPointsAccrued;
 
-        private static string GetTotalCostFromFlight(double costOfFlight)
-        {
-            return "Total costs from flight: " + costOfFlight;
-        }
+        private static string GetTotalCostFromFlight(double costOfFlight) => "Total costs from flight: " + costOfFlight;
 
-        private static string GetTotalRevenueFromFlight(double profitFromFlight)
-        {
-            return "Total revenue from flight: " + profitFromFlight;
-        }
+        private static string GetTotalRevenueFromFlight(double profitFromFlight) => "Total revenue from flight: " + profitFromFlight;
 
-        private static string GetAirlineEmployees(IEnumerable<Passenger> passengers)
-        {
-            return INDENTATION + "Airline employee comps: " + passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
-        }
+        private static string GetAirlineEmployees(IEnumerable<Passenger> passengers) => INDENTATION + "Airline employee comps: " + passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
 
-        private static string GetLoyaltyMemberSales(IEnumerable<Passenger> passengers)
-        {
-            return INDENTATION + "Loyalty member sales: " + passengers.Count(p => p.Type == PassengerType.LoyaltyMember);
-        }
+        private static string GetLoyaltyMemberSales(IEnumerable<Passenger> passengers) => INDENTATION + "Loyalty member sales: " + passengers.Count(p => p.Type == PassengerType.LoyaltyMember);
 
-        private static string GetGeneralSales(IEnumerable<Passenger> passengers)
-        {
-            return INDENTATION + "General sales: " + passengers.Count(p => p.Type == PassengerType.General);
-        }
+        private static string GetGeneralSales(IEnumerable<Passenger> passengers) => INDENTATION + "General sales: " + passengers.Count(p => p.Type == PassengerType.General);
 
-        private static string GetDiscountedSales(IEnumerable<Passenger> passengers)
-        {
-            return INDENTATION + "Discounted member sales: " + passengers.Count(p => p.Type == PassengerType.Discounted);
-        }
+        private static string GetDiscountedSales(IEnumerable<Passenger> passengers) => INDENTATION + "Discounted member sales: " + passengers.Count(p => p.Type == PassengerType.Discounted);
 
-        private static string DisplayProfitOrLoss(double profitSurplus)
-        {
-            return (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;
-        }
+        private static string DisplayProfitOrLoss(double profitSurplus) => (profitSurplus > 0 ? "Flight generating profit of: " : "Flight losing money of: ") + profitSurplus;
 
 
-        private static string GetResult(string flightRouteTitle)
-        {
-            return "Flight summary for " + flightRouteTitle;
-        }
+        private static string GetResult(string flightRouteTitle) => "Flight summary for " + flightRouteTitle;
 
-        private static string GetSeatsTaken(int seatsTaken)
-        {
-            return "Total passengers: " + seatsTaken;
-        }
+        private static string GetSeatsTaken(int seatsTaken) => "Total passengers: " + seatsTaken;
     }
 }

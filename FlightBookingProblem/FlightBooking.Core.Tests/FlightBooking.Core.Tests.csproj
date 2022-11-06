@@ -67,6 +67,10 @@
       <Project>{1e006604-66ed-4114-80b0-dd0413a80180}</Project>
       <Name>FlightBooking.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlightBooking.FlightProceedCheck\FlightBooking.FlightProceedCheck.csproj">
+      <Project>{2DB8FA8C-D1D5-4C4B-A88D-8BDB5F62000A}</Project>
+      <Name>FlightBooking.FlightProceedCheck</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightBooking.LoyaltyPointsCalculator\FlightBooking.LoyaltyPointsCalculator.csproj">
       <Project>{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}</Project>
       <Name>FlightBooking.LoyaltyPointsCalculator</Name>

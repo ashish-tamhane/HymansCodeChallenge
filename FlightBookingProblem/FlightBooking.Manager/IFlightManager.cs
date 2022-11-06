@@ -13,8 +13,6 @@ namespace FlightBooking.Manager.Interfaces
         int TotalLoyaltyPointsAccrued { get; set; }
         int TotalLoyaltyPointsRedeemed { get; set; }
 
-        IFlightFinance FlightFinance { get;}
-
         bool FlightProceedCheck(out string validation);
 
         bool ArePassengersMoreThanSeats();

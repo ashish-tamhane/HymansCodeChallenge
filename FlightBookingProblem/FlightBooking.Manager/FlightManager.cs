@@ -19,8 +19,6 @@ namespace FlightBooking.Manager.Classes
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
 
-        public IFlightFinance FlightFinance => flightFinance;
-
         public FlightValidationType FlightValidationType { get; set; }
 
         public FlightManager(IScheduledFlight scheduledFlight, 
@@ -73,10 +71,8 @@ namespace FlightBooking.Manager.Classes
                         seatsOccupied = scheduledFlight.SeatsOccupied,
                         totalSeats = scheduledFlight.TotalSeats,
                         minimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage,
-                        totalAirLineEmployees = scheduledFlight.AirLineSeats
+                        totalAirLineEmployees = scheduledFlight.GetFlightInformation().airlineSeats
                     };
-                    break;                
-                default:
                     break;
             }
 

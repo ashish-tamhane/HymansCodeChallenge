@@ -1,8 +1,10 @@
 ﻿using FlightBooking.Core.Classes;
 using FlightBooking.Core.Classes.FinanceCalculations;
+using FlightBooking.Entities.Enumerations;
 using FlightBooking.Entities.Models;
+using FlightBooking.FlightProceedCheck;
 using FlightBooking.Manager.Classes;
-
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlightBooking.Core.Tests
@@ -30,6 +32,27 @@ namespace FlightBooking.Core.Tests
         }
 
         [TestMethod]
+        public void TestAvailablePlanes()
+        {
+            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
+            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
+            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
+            flightManager.AddPassenger(new Passenger() { Type = PassengerType.General });
+            
+
+            Assert.AreEqual(1, flightManager.AvailablePlanes(flightManager.GetFlightInformation().seatsTaken).Count());
+        }
+
+        [TestMethod]
+        public void TestGetSummaryForRelaxedRuleSet()
+        {
+            flightManager.FlightValidationType = FlightValidationType.RelaxedRuleset;
+            string output = SummaryGenerator.GenerateSummary(flightManager);
+
+            Assert.AreEqual(TestMockData.ExpectedConsoleOutput.Trim(), output.Trim());
+        }
+
+        [TestMethod]
         public void TestGetFlightInformation()
         {
             FlightInformation flightInformation = flightManager.GetFlightInformation();
@@ -43,10 +66,17 @@ namespace FlightBooking.Core.Tests
             Assert.AreEqual(300, flightInformation.profitSurplus);
             Assert.AreEqual(10, flightInformation.seatsTaken);
             Assert.AreEqual(10, flightInformation.totalLoyaltyPointsAccrued);
-            Assert.AreEqual(100, flightInformation.totalLoyaltyPointsRedeemed);
-            
+            Assert.AreEqual(100, flightInformation.totalLoyaltyPointsRedeemed);            
+            Assert.AreEqual(1, flightInformation.airlineSeats);
+            Assert.IsFalse(flightManager.ArePassengersMoreThanSeats());
 
-            Assert.AreEqual(10, flightInformation.seatsTaken);
+            foreach (var item in flightManager.GetPassengers())
+            {                
+                Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.Type == item.Type && p.Name == item.Name));
+                Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.IsUsingLoyaltyPoints == item.IsUsingLoyaltyPoints && p.Name == item.Name));
+                Assert.IsTrue(TestMockData.GetPassengers().Any(p => p.Age == item.Age && p.Name == item.Name));
+            }
+
         }
 
         [TestMethod]
@@ -68,10 +98,7 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestSeatsTaken()
         {
-            double seatsTaken = 0;
-
-            seatsTaken = scheduledFlight.SeatsOccupied;
-
+            double seatsTaken = scheduledFlight.SeatsOccupied;
             Assert.AreEqual(10, seatsTaken);
         }
     }

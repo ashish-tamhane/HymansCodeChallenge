@@ -11,5 +11,6 @@ namespace FlightBooking.Entities.Models
         public bool IsUsingLoyaltyPoints { get; set; }
 
         public PassengerType Type { get; set; }
+
     }
 }
