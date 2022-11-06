@@ -10,7 +10,7 @@ namespace FlightBooking.Manager.Classes
 {
     public class FlightManager : IFlightManager
     {
-        private IScheduledFlight scheduledFlight;
+        private readonly IScheduledFlight scheduledFlight;
         private readonly FlightRoute flightRoute;
         private readonly ILoyaltyPointsCalculator loyaltyPointsCalculator;
         private readonly IFlightFinance flightFinance;
@@ -49,5 +49,24 @@ namespace FlightBooking.Manager.Classes
             => flightFinance.ProfitSurplus() > 0 &&
                             scheduledFlight.SeatsOccupied < scheduledFlight.TotalSeats &&
                             scheduledFlight.SeatsOccupied / scheduledFlight.TotalSeats > flightRoute.MinimumTakeOffPercentage;
+
+        public IEnumerable<Passenger> GetPassengers()
+        {
+            return scheduledFlight.Passengers;
+        }
+
+        public FlightInformation GetFlightInformation()
+        {
+            var flightInformation = scheduledFlight.GetFlightInformation();
+
+            flightInformation.costOfFlight = flightFinance.CostOfFlight();
+            flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
+            flightInformation.profitSurplus = flightFinance.ProfitSurplus();
+            
+            flightInformation.totalLoyaltyPointsAccrued = TotalLoyaltyPointsAccrued;
+            flightInformation.totalLoyaltyPointsRedeemed = TotalLoyaltyPointsRedeemed;
+
+            return flightInformation;
+        }
     }
 }

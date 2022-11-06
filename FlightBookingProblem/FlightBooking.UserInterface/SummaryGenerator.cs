@@ -5,6 +5,7 @@ using FlightBooking.Manager.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FlightBooking.Manager.Interfaces;
 
 namespace FlightBooking.Core.Classes
 {
@@ -12,28 +13,30 @@ namespace FlightBooking.Core.Classes
     {
         private static string INDENTATION = "    ";
 
-        public static string GenerateSummary(IEnumerable<Passenger> passengers,
-            FlightInformation summaryDetails,
-            FlightManager flightManager
+        public static string GenerateSummary(
+            IFlightManager flightManager
             )
-        {            
+        {
+            FlightInformation flightInformation = flightManager.GetFlightInformation();
+            IEnumerable<Passenger> passengers = flightManager.GetPassengers();
+
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(GetResult(summaryDetails.flightRouteTitle));
+            sb.AppendLine(GetResult(flightInformation.flightRouteTitle));
             sb.AppendLine();
-            sb.AppendLine(GetSeatsTaken(summaryDetails.seatsTaken));            
+            sb.AppendLine(GetSeatsTaken(flightInformation.seatsTaken));            
             sb.AppendLine(GetGeneralSales(passengers));            
             sb.AppendLine(GetLoyaltyMemberSales(passengers));
             sb.AppendLine(GetDiscountedSales(passengers));
             sb.AppendLine(GetAirlineEmployees(passengers));            
             sb.AppendLine();
-            sb.AppendLine(GetTotalExpectedBaggage(summaryDetails.expectedBaggageFromFlight));            
+            sb.AppendLine(GetTotalExpectedBaggage(flightInformation.expectedBaggageFromFlight));            
             sb.AppendLine();            
-            sb.AppendLine(GetTotalRevenueFromFlight(summaryDetails.profitFromFlight));            
-            sb.AppendLine(GetTotalCostFromFlight(summaryDetails.costOfFlight));                      
-            sb.AppendLine(DisplayProfitOrLoss(summaryDetails.profitSurplus));            
+            sb.AppendLine(GetTotalRevenueFromFlight(flightInformation.profitFromFlight));            
+            sb.AppendLine(GetTotalCostFromFlight(flightInformation.costOfFlight));                      
+            sb.AppendLine(DisplayProfitOrLoss(flightInformation.profitSurplus));            
             sb.AppendLine();            
-            sb.AppendLine(GetLoyaltyPointsGivenAway(summaryDetails.totalLoyaltyPointsAccrued));
-            sb.AppendLine(GetTotalLoyaltyPointsRedeemed(summaryDetails.totalLoyaltyPointsRedeemed));            
+            sb.AppendLine(GetLoyaltyPointsGivenAway(flightInformation.totalLoyaltyPointsAccrued));
+            sb.AppendLine(GetTotalLoyaltyPointsRedeemed(flightInformation.totalLoyaltyPointsRedeemed));            
             sb.AppendLine();            
             sb.AppendLine();
 

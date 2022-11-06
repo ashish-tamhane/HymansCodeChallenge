@@ -6,6 +6,7 @@ using FlightBooking.Manager.Classes;
 using FlightBooking.Entities.Models;
 using FlightBooking.Entities.Enumerations;
 using FlightBooking.BaggageCalculator.Classes;
+using System.Linq;
 
 namespace FlightBookingProblem
 {
@@ -25,18 +26,8 @@ namespace FlightBookingProblem
                 var enteredText = command.ToLower();
                 if (enteredText.Contains("ruleset"))
                 {
-                    FlightInformation flightInformation = _scheduledFlight.GetFlightInformation();
-
-                    FlightFinance flightFinance = new FlightFinance(_scheduledFlight, _scheduledFlight.FlightRoute, new ProfitCalculator());
-                    flightInformation.costOfFlight = flightFinance.CostOfFlight();
-                    flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
-                    flightInformation.profitSurplus = flightFinance.ProfitSurplus();
-
-                    flightInformation.totalLoyaltyPointsAccrued = flightManager.TotalLoyaltyPointsAccrued;
-                    flightInformation.totalLoyaltyPointsRedeemed = flightManager.TotalLoyaltyPointsRedeemed;
-
                     Console.WriteLine();
-                    Console.WriteLine(SummaryGenerator.GenerateSummary(_scheduledFlight.Passengers, flightInformation, flightManager));
+                    Console.WriteLine(SummaryGenerator.GenerateSummary(flightManager));
                 }
                 else if (enteredText.Contains("print summary"))
                 {
@@ -112,7 +103,7 @@ namespace FlightBookingProblem
 
             _scheduledFlight = new ScheduledFlight(londonToParis,                 
                 new FlightBaggageCalculator(),
-                new Plane { Id = 123, Name = "Antonov AN-2", NumberOfSeats = 12 });
+                PlanesList.Planes.FirstOrDefault(p => p.Id == 123));
 
             IFlightFinance flightFinance = new FlightFinance(_scheduledFlight, londonToParis, new ProfitCalculator());
 

@@ -15,5 +15,9 @@ namespace FlightBooking.Manager.Interfaces
         IFlightFinance FlightFinance { get;}
 
         bool FlightProceedCheck();
+
+        IEnumerable<Passenger> GetPassengers();
+
+        FlightInformation GetFlightInformation();
     }
 }

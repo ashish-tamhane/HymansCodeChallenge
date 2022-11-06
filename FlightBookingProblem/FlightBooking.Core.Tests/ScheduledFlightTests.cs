@@ -24,17 +24,7 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestGetSummary()
         {
-            
-            FlightInformation flightInformation = scheduledFlight.GetFlightInformation();
-            FlightFinance flightFinance = new FlightFinance(scheduledFlight, scheduledFlight.FlightRoute, new ProfitCalculator());
-
-            flightInformation.costOfFlight = flightFinance.CostOfFlight();
-            flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
-            flightInformation.profitSurplus = flightFinance.ProfitSurplus();
-            flightInformation.totalLoyaltyPointsAccrued = flightManager.TotalLoyaltyPointsAccrued;
-            flightInformation.totalLoyaltyPointsRedeemed = flightManager.TotalLoyaltyPointsRedeemed;
-
-            string output = SummaryGenerator.GenerateSummary(scheduledFlight.Passengers, flightInformation, flightManager);
+            string output = SummaryGenerator.GenerateSummary(flightManager);
 
             Assert.AreEqual(TestMockData.ExpectedConsoleOutput.Trim(), output.Trim()) ;
         }
@@ -42,16 +32,8 @@ namespace FlightBooking.Core.Tests
         [TestMethod]
         public void TestGetFlightInformation()
         {
-
-            FlightInformation flightInformation = scheduledFlight.GetFlightInformation();
-            FlightFinance flightFinance = new FlightFinance(scheduledFlight, scheduledFlight.FlightRoute, new ProfitCalculator());
-
-            flightInformation.costOfFlight = flightFinance.CostOfFlight();
-            flightInformation.profitFromFlight = flightFinance.ProfitFromFlight();
-            flightInformation.profitSurplus = flightFinance.ProfitSurplus();
-            flightInformation.totalLoyaltyPointsAccrued = flightManager.TotalLoyaltyPointsAccrued;
-            flightInformation.totalLoyaltyPointsRedeemed = flightManager.TotalLoyaltyPointsRedeemed;
-
+            FlightInformation flightInformation = flightManager.GetFlightInformation();
+            
             Assert.AreEqual(12, flightInformation.aircraftNumberOfSeats);
             Assert.AreEqual(500, flightInformation.costOfFlight);
             Assert.AreEqual(13, flightInformation.expectedBaggageFromFlight);
