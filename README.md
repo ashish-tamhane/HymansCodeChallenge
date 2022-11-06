@@ -12,5 +12,6 @@ Code summary:
 2. New features and their tests which were required have been added.
 3. Test driven development style.
 4. 99% Code Coverage achieved through unit testing which covers all the use cases.
+5. GitFlow branching model is used for development (Feature branch is still kept in the git repo).
 
 InputCases.txt added for various input test cases.
