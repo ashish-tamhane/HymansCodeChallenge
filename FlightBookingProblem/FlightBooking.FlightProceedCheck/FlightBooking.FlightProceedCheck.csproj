@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F2F7B14F-529A-41AB-A703-D96606F8B350}</ProjectGuid>
+    <ProjectGuid>{2DB8FA8C-D1D5-4C4B-A88D-8BDB5F62000A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FlightBooking.Manager</RootNamespace>
-    <AssemblyName>FlightBooking.Manager</AssemblyName>
+    <RootNamespace>FlightBooking.FlightProceedCheck</RootNamespace>
+    <AssemblyName>FlightBooking.FlightProceedCheck</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,27 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlightManager.cs" />
-    <Compile Include="IFlightManager.cs" />
+    <Compile Include="FlightDefaultRuleSetValidation.cs" />
+    <Compile Include="FlightRelaxedRuleSetValidation.cs" />
+    <Compile Include="FlightValidation.cs" />
+    <Compile Include="IFlightValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FlightBooking.Core\FlightBooking.Core.csproj">
-      <Project>{22f6b34b-9154-4944-b1fd-d5564e250ae9}</Project>
-      <Name>FlightBooking.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlightBooking.Entities\FlightBooking.Entities.csproj">
-      <Project>{1E006604-66ED-4114-80B0-DD0413A80180}</Project>
-      <Name>FlightBooking.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlightBooking.FlightProceedCheck\FlightBooking.FlightProceedCheck.csproj">
-      <Project>{2db8fa8c-d1d5-4c4b-a88d-8bdb5f62000a}</Project>
-      <Name>FlightBooking.FlightProceedCheck</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlightBooking.LoyaltyPointsCalculator\FlightBooking.LoyaltyPointsCalculator.csproj">
-      <Project>{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}</Project>
-      <Name>FlightBooking.LoyaltyPointsCalculator</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

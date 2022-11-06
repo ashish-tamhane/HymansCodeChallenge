@@ -3,6 +3,7 @@ using FlightBooking.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using FlightBooking.BaggageCalculator.Interfaces;
+using FlightBooking.Entities.Enumerations;
 
 namespace FlightBooking.Core.Classes
 {
@@ -19,6 +20,8 @@ namespace FlightBooking.Core.Classes
         public int SeatsOccupied => Passengers.Count();
 
         public double TotalSeats => aircraft.NumberOfSeats;
+
+        public int AirLineSeats => passengers.Count(p => p.Type == PassengerType.AirlineEmployee);
 
         public ScheduledFlight(FlightRoute flightRoute,
             IBaggageCalculator baggageCalculator,

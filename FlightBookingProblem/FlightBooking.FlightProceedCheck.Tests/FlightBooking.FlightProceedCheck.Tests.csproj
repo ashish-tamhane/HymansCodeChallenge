@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F2F7B14F-529A-41AB-A703-D96606F8B350}</ProjectGuid>
+    <ProjectGuid>{5576EF08-8C71-4691-A73F-76FA7F4ED9A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FlightBooking.Manager</RootNamespace>
-    <AssemblyName>FlightBooking.Manager</AssemblyName>
+    <RootNamespace>FlightBooking.FlightProceedCheck.Tests</RootNamespace>
+    <AssemblyName>FlightBooking.FlightProceedCheck.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,35 +40,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlightManager.cs" />
-    <Compile Include="IFlightManager.cs" />
+    <Compile Include="FlightProceedCheckTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlightBooking.Core\FlightBooking.Core.csproj">
-      <Project>{22f6b34b-9154-4944-b1fd-d5564e250ae9}</Project>
-      <Name>FlightBooking.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlightBooking.Entities\FlightBooking.Entities.csproj">
-      <Project>{1E006604-66ED-4114-80B0-DD0413A80180}</Project>
-      <Name>FlightBooking.Entities</Name>
-    </ProjectReference>
+    <PackageReference Include="MSTest.TestAdapter">
+      <Version>2.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>2.2.7</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FlightBooking.FlightProceedCheck\FlightBooking.FlightProceedCheck.csproj">
       <Project>{2db8fa8c-d1d5-4c4b-a88d-8bdb5f62000a}</Project>
       <Name>FlightBooking.FlightProceedCheck</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FlightBooking.LoyaltyPointsCalculator\FlightBooking.LoyaltyPointsCalculator.csproj">
-      <Project>{9E535A6C-530D-4FF8-8F39-4345E13FF7B6}</Project>
-      <Name>FlightBooking.LoyaltyPointsCalculator</Name>
-    </ProjectReference>
   </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,7 @@ using FlightBooking.Entities.Models;
 using FlightBooking.Entities.Enumerations;
 using FlightBooking.BaggageCalculator.Classes;
 using System.Linq;
+using FlightBooking.FlightProceedCheck;
 
 namespace FlightBookingProblem
 {
@@ -34,7 +35,7 @@ namespace FlightBookingProblem
                     Console.WriteLine("Select ruleset: ");
                     Console.WriteLine("Default ruleset");
                     Console.WriteLine("Relaxed ruleset");
-                    Console.WriteLine();                    
+                    Console.WriteLine();
                 }
                 else if (enteredText.Contains("add discounted"))
                 {
@@ -109,7 +110,8 @@ namespace FlightBookingProblem
 
             flightManager = new FlightManager(_scheduledFlight,
                 _scheduledFlight.FlightRoute, 
-                new LoyaltyPointsCalculator(), flightFinance);
+                new LoyaltyPointsCalculator(), 
+                flightFinance, FlightValidationType.DefaultRuleset);
         }
     }
 }

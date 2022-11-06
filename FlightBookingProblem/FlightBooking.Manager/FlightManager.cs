@@ -2,6 +2,7 @@
 using FlightBooking.Core.Interfaces;
 using FlightBooking.Core.Interfaces.FinanceCalculations;
 using FlightBooking.Entities.Models;
+using FlightBooking.FlightProceedCheck;
 using FlightBooking.Manager.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace FlightBooking.Manager.Classes
         private readonly IScheduledFlight scheduledFlight;
         private readonly FlightRoute flightRoute;
         private readonly ILoyaltyPointsCalculator loyaltyPointsCalculator;
-        private readonly IFlightFinance flightFinance;
+        private readonly IFlightFinance flightFinance;        
+        private readonly FlightValidationType flightRulesetType;
 
         public int TotalLoyaltyPointsAccrued { get; set; }
         public int TotalLoyaltyPointsRedeemed { get; set; }
@@ -23,12 +25,15 @@ namespace FlightBooking.Manager.Classes
         public FlightManager(IScheduledFlight scheduledFlight, 
             FlightRoute flightRoute, 
             ILoyaltyPointsCalculator loyaltyPointsCalculator,
-            IFlightFinance flightFinance)
+            IFlightFinance flightFinance,            
+            FlightValidationType flightValidationType
+            )
         {
             this.scheduledFlight = scheduledFlight;
             this.flightRoute = flightRoute;
             this.loyaltyPointsCalculator = loyaltyPointsCalculator;
-            this.flightFinance = flightFinance;
+            this.flightFinance = flightFinance;            
+            this.flightRulesetType = flightValidationType;
         }
 
         public void AddPassenger(Passenger passenger)
@@ -45,10 +50,43 @@ namespace FlightBooking.Manager.Classes
         public void AddPassengers(IEnumerable<Passenger> passengers) 
             => passengers.ToList().ForEach(p => AddPassenger(p));
 
-        public bool FlightProceedCheck() 
-            => flightFinance.ProfitSurplus() > 0 &&
-                            scheduledFlight.SeatsOccupied < scheduledFlight.TotalSeats &&
-                            scheduledFlight.SeatsOccupied / scheduledFlight.TotalSeats > flightRoute.MinimumTakeOffPercentage;
+        public bool FlightProceedCheck()
+        {
+            string output;
+            IFlightValidation flightValidation = null;
+
+            switch (flightRulesetType)
+            {
+                case FlightValidationType.DefaultRuleset:
+                    flightValidation = new FlightDefaultRuleSetValidation()
+                    {
+                        profitSurplus = flightFinance.ProfitSurplus(),
+                        seatsOccupied = scheduledFlight.SeatsOccupied,
+                        totalSeats = scheduledFlight.TotalSeats,
+                        minimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage
+                    };
+                    break;
+                case FlightValidationType.RelaxedRuleset:
+                    flightValidation = new FlightRelaxedRuleSetValidation()
+                    {
+                        profitSurplus = flightFinance.ProfitSurplus(),
+                        seatsOccupied = scheduledFlight.SeatsOccupied,
+                        totalSeats = scheduledFlight.TotalSeats,
+                        minimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage,
+                        totalAirLineEmployees = scheduledFlight.AirLineSeats
+                    };
+                    break;                
+                default:
+                    break;
+            }
+
+            
+
+            return new FlightDefaultRuleSetValidation() { profitSurplus = flightFinance.ProfitSurplus(),
+                seatsOccupied = scheduledFlight.SeatsOccupied, 
+                totalSeats = scheduledFlight.TotalSeats, 
+                minimumTakeOffPercentage = flightRoute.MinimumTakeOffPercentage }.ValidateCondition(out output);
+        }
 
         public IEnumerable<Passenger> GetPassengers()
         {

@@ -7,6 +7,7 @@ using FlightBooking.Manager.Classes;
 using System.Collections.Generic;
 using FlightBooking.BaggageCalculator.Classes;
 using FlightBooking.Core.Interfaces;
+using FlightBooking.FlightProceedCheck;
 
 namespace FlightBooking.Core.Tests
 {
@@ -190,8 +191,8 @@ THIS FLIGHT MAY PROCEED";
 
             IFlightFinance flightFinance = new FlightFinance(_scheduledFlight, londonToParis, new ProfitCalculator());
 
-            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator(), flightFinance);
-            flightManager.AddPassengers(GetPassengers());                        
+            flightManager = new FlightManager(_scheduledFlight, londonToParis, new LoyaltyPointsCalculator(), flightFinance, FlightValidationType.DefaultRuleset);
+            flightManager.AddPassengers(GetPassengers());
         }
     }
 }
