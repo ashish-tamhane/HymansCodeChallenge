@@ -16,6 +16,10 @@ namespace FlightBooking.Manager.Interfaces
 
         bool FlightProceedCheck();
 
+        bool ArePassengersMoreThanSeats();
+
+        IEnumerable<Plane> AvailablePlanes(int passengerCount);
+
         IEnumerable<Passenger> GetPassengers();
 
         FlightInformation GetFlightInformation();

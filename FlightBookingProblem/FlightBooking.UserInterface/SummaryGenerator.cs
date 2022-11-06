@@ -41,9 +41,23 @@ namespace FlightBooking.Core.Classes
             sb.AppendLine();
 
             if (flightManager.FlightProceedCheck())
+            {
                 sb.Append("THIS FLIGHT MAY PROCEED");
+            }
             else
-                sb.Append("FLIGHT MAY NOT PROCEED");
+            {
+                sb.AppendLine("FLIGHT MAY NOT PROCEED");
+                if (flightManager.ArePassengersMoreThanSeats())
+                {
+                    var availablePlanes = flightManager.AvailablePlanes(flightManager.GetPassengers().Count());
+
+                    if (availablePlanes.Any())
+                    {
+                        sb.AppendLine("Other more suitable aircraft are:");
+                        availablePlanes.ToList().ForEach(p => sb.AppendLine(p.Name));
+                    }                    
+                }                
+            }
             
             return sb.ToString();
         }

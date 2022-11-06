@@ -68,5 +68,15 @@ namespace FlightBooking.Manager.Classes
 
             return flightInformation;
         }
+
+        public bool ArePassengersMoreThanSeats()
+        {
+            return scheduledFlight.SeatsOccupied > scheduledFlight.TotalSeats;
+        }
+
+        public IEnumerable<Plane> AvailablePlanes(int passengerCount)
+        {
+            return PlanesList.Planes.Where(p => p.NumberOfSeats > passengerCount);
+        }
     }
 }
